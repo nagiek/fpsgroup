@@ -1,0 +1,16 @@
+{
+  "name": "fpsgroup",
+  "main": "index.js",
+  "version": "0.0.0",
+  "description": "National Bank Structured Products",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
+}
