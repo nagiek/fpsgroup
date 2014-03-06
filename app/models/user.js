@@ -1,7 +1,13 @@
-var Base = require('./base');
+(function() {
+  var Base;
 
-module.exports = Base.extend({
-  url: '/users/:login',
-  idAttribute: 'login'
-});
-module.exports.id = 'User';
+  Base = require("./base");
+
+  module.exports = Base.extend("User", {
+    url: "/users/:login",
+    idAttribute: "login"
+  });
+
+  module.exports.id = "User";
+
+}).call(this);

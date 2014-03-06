@@ -1,7 +1,13 @@
-var Base = require('./base');
+(function() {
+  var Base;
 
-module.exports = Base.extend({
-  url: '/repos/:owner/:name',
-  api: 'travis-ci'
-});
-module.exports.id = 'Build';
+  Base = require("./base");
+
+  module.exports = Base.extend("Build", {
+    url: "/repos/:owner/:name",
+    api: "travis-ci"
+  });
+
+  module.exports.id = "Build";
+
+}).call(this);

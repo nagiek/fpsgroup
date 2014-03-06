@@ -1,8 +1,15 @@
-var User = require('../models/user')
-  , Base = require('./base');
+(function() {
+  var Base, User;
 
-module.exports = Base.extend({
-  model: User,
-  url: '/users'
-});
-module.exports.id = 'Users';
+  User = require("../models/user");
+
+  Base = require("./base");
+
+  module.exports = Base.extend({
+    model: User,
+    url: "/users"
+  });
+
+  module.exports.id = "Users";
+
+}).call(this);

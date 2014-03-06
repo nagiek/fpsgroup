@@ -1,7 +1,13 @@
-var Base = require('./base');
+(function() {
+  var Base;
 
-module.exports = Base.extend({
-  url: '/repos/:owner/:name',
-  idAttribute: 'name'
-});
-module.exports.id = 'Repo';
+  Base = require("./base");
+
+  module.exports = Base.extend("Repo", {
+    url: "/repos/:owner/:name",
+    idAttribute: "name"
+  });
+
+  module.exports.id = "Repo";
+
+}).call(this);

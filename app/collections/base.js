@@ -1,3 +1,8 @@
-var RendrBase = require('rendr/shared/base/collection');
+(function() {
+  var RendrBase;
 
-module.exports = RendrBase.extend({});
+  RendrBase = require("rendr/shared/base/collection");
+
+  module.exports = RendrBase.extend({});
+
+}).call(this);

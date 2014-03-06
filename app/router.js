@@ -1,21 +1,29 @@
-var BaseClientRouter = require('rendr/client/router');
+(function() {
+  var BaseClientRouter, Router;
 
-var Router = module.exports = function Router(options) {
-  BaseClientRouter.call(this, options);
-};
+  BaseClientRouter = require("rendr/client/router");
 
-/**
- * Set up inheritance.
- */
-Router.prototype = Object.create(BaseClientRouter.prototype);
-Router.prototype.constructor = BaseClientRouter;
+  Router = module.exports = Router = function(options) {
+    BaseClientRouter.call(this, options);
+  };
 
-Router.prototype.postInitialize = function() {
-  this.on('action:start', this.trackImpression, this);
-};
 
-Router.prototype.trackImpression = function() {
-  if (window._gaq) {
-    _gaq.push(['_trackPageview']);
-  }
-};
+  /*
+  Set up inheritance.
+   */
+
+  Router.prototype = Object.create(BaseClientRouter.prototype);
+
+  Router.prototype.constructor = BaseClientRouter;
+
+  Router.prototype.postInitialize = function() {
+    this.on("action:start", this.trackImpression, this);
+  };
+
+  Router.prototype.trackImpression = function() {
+    if (window._gaq) {
+      _gaq.push(["_trackPageview"]);
+    }
+  };
+
+}).call(this);

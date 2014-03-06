@@ -1,14 +1,21 @@
-var Repo = require('../models/repo')
-  , Base = require('./base');
+(function() {
+  var Base, Repo;
 
-module.exports = Base.extend({
-  model: Repo,
-  url: function() {
-    if (this.params.user != null) {
-      return '/users/:user/repos';
-    } else {
-      return '/repositories';
+  Repo = require("../models/repo");
+
+  Base = require("./base");
+
+  module.exports = Base.extend({
+    model: Repo,
+    url: function() {
+      if (this.params.user != null) {
+        return "/users/:user/repos";
+      } else {
+        return "/repositories";
+      }
     }
-  }
-});
-module.exports.id = 'Repos';
+  });
+
+  module.exports.id = "Repos";
+
+}).call(this);

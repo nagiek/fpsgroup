@@ -1,5 +1,8 @@
-var RendrView = require('rendr/shared/base/view');
+(function() {
+  var RendrView;
 
-// Create a base view, for adding common extensions to our
-// application's views.
-module.exports = RendrView.extend({});
+  RendrView = require("rendr/shared/base/view");
+
+  module.exports = RendrView.extend({});
+
+}).call(this);
