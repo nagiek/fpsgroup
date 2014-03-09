@@ -1,7 +1,8 @@
 path = require("path")
 stylesheetsDir = "src/css/stylesheets"
 coffeeDir = "src/js"
-templatesDir = "src/js/templates"
+markdownDir = "src/md"
+handlebarsDir = "src/hbs"
 
 module.exports = (grunt) ->
   
@@ -31,7 +32,7 @@ module.exports = (grunt) ->
       compile:
         files: [
           # i.e. __layout.hbs.`
-          {expand: true, flatten: true, src: [templatesDir + '/*'], dest: 'app/templates/', filter:  (filepath) -> path.basename(filepath).slice(0, 2) is "__"},
+          {expand: true, flatten: true, src: [handlebarsDir + '/*'], dest: 'app/templates/', filter:  (filepath) -> path.basename(filepath).slice(0, 2) is "__"},
         ]
 
 
@@ -41,9 +42,9 @@ module.exports = (grunt) ->
           namespace: false
           commonjs: true
           processName: (filename) ->
-            filename.replace(templatesDir + "/", "").replace ".hbs", ""
+            filename.replace(handlebarsDir + "/", "").replace ".hbs", ""
 
-        src: templatesDir + "/**/*.hbs"
+        src: handlebarsDir + "/**/*.hbs"
         dest: "app/templates/compiledTemplates.js"
         filter: (filepath) ->
           filename = path.basename(filepath)
@@ -51,6 +52,28 @@ module.exports = (grunt) ->
           # Exclude files that begin with '__' from being sent to the client,
           # i.e. __layout.hbs.
           filename.slice(0, 2) isnt "__"
+
+    markdown:
+      compile:
+        options:
+          template: false
+          markdownOptions: 
+            gfm: true
+            tables: true
+            breaks: false
+            pedantic: false
+            sanitize: false
+            smartLists: true
+            smartypants: false
+        files: [
+          {
+            expand: true,
+            cwd: markdownDir
+            src: ['**/*.md']
+            dest: handlebarsDir
+            ext: '.hbs'
+          }
+        ]
 
     watch:
       scripts:
@@ -60,8 +83,8 @@ module.exports = (grunt) ->
           interrupt: true
 
       templates:
-        files: "src/**/*.hbs"
-        tasks: ["handlebars"]
+        files: ["src/hbs/**/*.hbs"], ["src/md/**/*.md"]
+        tasks: ["markdown"], ["handlebars"]
         options:
           interrupt: true
 
@@ -100,6 +123,7 @@ module.exports = (grunt) ->
         dest: "public/testBundle.js"
 
   grunt.loadNpmTasks "grunt-browserify"
+  grunt.loadNpmTasks "grunt-markdown"
   grunt.loadNpmTasks "grunt-contrib-coffee"
   grunt.loadNpmTasks "grunt-contrib-copy"
   grunt.loadNpmTasks "grunt-contrib-handlebars"
@@ -123,6 +147,7 @@ module.exports = (grunt) ->
   grunt.registerTask "compile", [
     "copy"
     "coffee"
+    "markdown"
     "handlebars"
     "browserify"
     "stylus"
