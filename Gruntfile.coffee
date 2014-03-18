@@ -9,6 +9,14 @@ module.exports = (grunt) ->
   # Project configuration.
   grunt.initConfig
     pkg: grunt.file.readJSON("package.json")
+
+    copy:
+      compile:
+        files: [          
+          {expand: true, flatten: true, src: [handlebarsDir + '/*'], dest: 'app/templates/', filter:  (filepath) -> path.basename(filepath).slice(0, 2) is "__"}, # i.e. __layout.hbs.`
+          {expand: true, flatten: true, cwd: "bower_components/bootstrap/dist/css/", src: "bootstrap.min.css", dest: "src/css/vendor"},
+        ]
+
     stylus:
       compile:
         options:
@@ -27,14 +35,6 @@ module.exports = (grunt) ->
           dest: 'app'
           ext: '.js'
         }]
-
-    copy:
-      compile:
-        files: [
-          # i.e. __layout.hbs.`
-          {expand: true, flatten: true, src: [handlebarsDir + '/*'], dest: 'app/templates/', filter:  (filepath) -> path.basename(filepath).slice(0, 2) is "__"},
-        ]
-
 
     handlebars:
       compile:
@@ -83,8 +83,14 @@ module.exports = (grunt) ->
           interrupt: true
 
       templates:
-        files: ["src/hbs/**/*.hbs"], ["src/md/**/*.md"]
-        tasks: ["markdown"], ["handlebars"]
+        files: [markdownDir + "/**/*.md"]
+        tasks: ["markdown"]
+        options:
+          interrupt: true
+
+      templates2:
+        files: [handlebarsDir + "/**/*.hbs"]
+        tasks: ["handlebars"]
         options:
           interrupt: true
 

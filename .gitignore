@@ -28,3 +28,4 @@ build/Release
 .bowerrc
 bower_components
 node_modules
+src/css/vendor
