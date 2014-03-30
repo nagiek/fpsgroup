@@ -1,25 +1,11 @@
 BaseApp = require("rendr/shared/app")
 Parse = require("parse").Parse
 handlebarsHelpers = require("./lib/handlebarsHelpers")
-ModelUtils = require("../shared/modelUtils")
 
 ###
 Extend the `BaseApp` class, adding any custom methods or overrides.
 ###
 module.exports = BaseApp.extend(
-
-
-  ###
-  @shared
-  ###
-  # constructor: (attributes, options = {}) ->
-
-  #   options.modelUtils = options.modelUtils or new ModelUtils(options.entryPath)
-
-  #   # Call 'super'
-  #   BaseApp::constructor(attributes, options)
-  #   @
-
   
   ###
   Client and server.

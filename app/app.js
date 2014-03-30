@@ -1,5 +1,5 @@
 (function() {
-  var BaseApp, ModelUtils, Parse, handlebarsHelpers;
+  var BaseApp, Parse, handlebarsHelpers;
 
   BaseApp = require("rendr/shared/app");
 
@@ -7,18 +7,12 @@
 
   handlebarsHelpers = require("./lib/handlebarsHelpers");
 
-  ModelUtils = require("../shared/modelUtils");
-
 
   /*
   Extend the `BaseApp` class, adding any custom methods or overrides.
    */
 
   module.exports = BaseApp.extend({
-
-    /*
-    @shared
-     */
 
     /*
     Client and server.

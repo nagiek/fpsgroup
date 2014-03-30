@@ -10,6 +10,22 @@ module.exports =
 
     return
 
+  new: (params, callback) ->
+    spec =
+      model:
+        model: "Issue"
+        params: params
+
+      build:
+        model: "Build"
+        params: params
+
+    @app.fetch spec, (err, result) ->
+      callback err, result
+      return
+
+    return
+
   show: (params, callback) ->
     spec =
       model:
