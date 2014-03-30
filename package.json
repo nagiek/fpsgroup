@@ -15,6 +15,7 @@
     "express": "~3",
     "underscore": "~1.5.2",
     "marked": "https://github.com/nagiek/marked/tarball/f9cd063398b18acc6d7e44f1f26382a5ed7426ea",
+    "qs": "0.6.6",
     "rendr-handlebars": "0.2.0",
     "rendr": "https://github.com/nagiek/rendr/tarball/93e825b5de19ca03423a80d798ae9e404f75e8a3",
     "parse": "~1.2.16"

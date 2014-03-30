@@ -10,4 +10,6 @@
 
   module.exports.id = "Build";
 
+  module.exports.prototype.className = "Build";
+
 }).call(this);

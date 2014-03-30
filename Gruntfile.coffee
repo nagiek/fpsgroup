@@ -82,6 +82,24 @@ module.exports = (grunt) ->
         options:
           interrupt: true
 
+      scripts2:
+        files: "app/*.js"
+        tasks: ["browserify"]
+        options:
+          interrupt: true
+
+      coffees:
+        files: "src/js/**/*.coffee"
+        tasks: ["coffee"]
+        options:
+          interrupt: true
+
+      coffees2:
+        files: "src/js/*.coffee"
+        tasks: ["coffee"]
+        options:
+          interrupt: true
+
       templates:
         files: [markdownDir + "/**/*.md"]
         tasks: ["markdown"]

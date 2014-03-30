@@ -11,6 +11,17 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.logger());
 app.use(express.bodyParser());
 
+
+/**
+ * Keys to connect to Parse.
+ */
+var APP_ID =      "S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp"
+  , CLIENT_KEY =  "OcReRafvOmkSy4GrHL9DrTwHLTJpOPhPps21rmYN"
+  , JS_KEY =      "bWEMzR4vYCQvXGhsQRaayQljkhFm3TJiToZ5rBEJ"
+  , REST_KEY =    "bBBa0OPsN8hjkRaKw069oOflBED2PvHowfIQYoiN"
+  ;
+
+
 /**
  * In this simple example, the DataAdapter config, which specifies host, port, etc. of the API
  * to hit, is written inline. In a real world example, you would probably move this out to a
@@ -19,8 +30,13 @@ app.use(express.bodyParser());
  */
 var dataAdapterConfig = {
   'default': {
-    host: 'api.github.com',
-    protocol: 'https'
+    host: 'api.parse.com/1',
+    protocol: 'https',
+    headers: {
+      "X-Parse-Application-Id"  : APP_ID,
+      "X-Parse-REST-API-Key"    : REST_KEY,
+      "Content-Type"            : 'application/json'
+    }
   },
   'travis-ci': {
     host: 'api.travis-ci.org',
@@ -52,7 +68,7 @@ function start(){
   var port = process.env.PORT || 3030;
 
   // Client Key
-  Parse.initialize("S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp", "OcReRafvOmkSy4GrHL9DrTwHLTJpOPhPps21rmYN");
+  Parse.initialize(APP_ID, JS_KEY);
 
   app.listen(port);
   console.log("server pid %s listening on port %s in %s mode",

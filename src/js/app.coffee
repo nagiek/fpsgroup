@@ -1,11 +1,25 @@
 BaseApp = require("rendr/shared/app")
 Parse = require("parse").Parse
 handlebarsHelpers = require("./lib/handlebarsHelpers")
+ModelUtils = require("../shared/modelUtils")
 
 ###
 Extend the `BaseApp` class, adding any custom methods or overrides.
 ###
 module.exports = BaseApp.extend(
+
+
+  ###
+  @shared
+  ###
+  # constructor: (attributes, options = {}) ->
+
+  #   options.modelUtils = options.modelUtils or new ModelUtils(options.entryPath)
+
+  #   # Call 'super'
+  #   BaseApp::constructor(attributes, options)
+  #   @
+
   
   ###
   Client and server.
@@ -41,8 +55,8 @@ module.exports = BaseApp.extend(
   ###
   start: ->
     
-    # Client Key
-    Parse.initialize "S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp", "OcReRafvOmkSy4GrHL9DrTwHLTJpOPhPps21rmYN"
+    # Javascript Key
+    Parse.initialize "S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp", "bWEMzR4vYCQvXGhsQRaayQljkhFm3TJiToZ5rBEJ"
     
     # Show a loading indicator when the app is fetching.
     @router.on "action:start", (->

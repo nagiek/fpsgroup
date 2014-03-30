@@ -4,3 +4,4 @@ module.exports = Base.extend("Build",
   api: "travis-ci"
 )
 module.exports.id = "Build"
+module.exports::className = "Build";

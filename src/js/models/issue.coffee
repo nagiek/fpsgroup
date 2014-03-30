@@ -4,3 +4,4 @@ module.exports = Base.extend("Issue",
   idAttribute: "name"
 )
 module.exports.id = "Issue"
+module.exports::className = "Issue";

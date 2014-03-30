@@ -1,5 +1,5 @@
 (function() {
-  var BaseApp, Parse, handlebarsHelpers;
+  var BaseApp, ModelUtils, Parse, handlebarsHelpers;
 
   BaseApp = require("rendr/shared/app");
 
@@ -7,12 +7,18 @@
 
   handlebarsHelpers = require("./lib/handlebarsHelpers");
 
+  ModelUtils = require("../shared/modelUtils");
+
 
   /*
   Extend the `BaseApp` class, adding any custom methods or overrides.
    */
 
   module.exports = BaseApp.extend({
+
+    /*
+    @shared
+     */
 
     /*
     Client and server.
@@ -46,7 +52,7 @@
     in order to do things like bind events to the router, as shown below.
      */
     start: function() {
-      Parse.initialize("S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp", "OcReRafvOmkSy4GrHL9DrTwHLTJpOPhPps21rmYN");
+      Parse.initialize("S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp", "bWEMzR4vYCQvXGhsQRaayQljkhFm3TJiToZ5rBEJ");
       this.router.on("action:start", (function() {
         this.set({
           loading: true
