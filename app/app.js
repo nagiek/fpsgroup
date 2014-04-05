@@ -1,11 +1,15 @@
 (function() {
-  var BaseApp, Parse, handlebarsHelpers;
+  var BaseApp, Parse, Polyglot, handlebarsHelpers, moment;
 
   BaseApp = require("rendr/shared/app");
 
-  Parse = require("parse").Parse;
+  Parse = require("./lib/parseFix");
 
   handlebarsHelpers = require("./lib/handlebarsHelpers");
+
+  moment = require("moment");
+
+  Polyglot = require("node-polyglot");
 
 
   /*
@@ -17,14 +21,26 @@
     /*
     Client and server.
     
-    `postInitialize` is called on app initialize, both on the client and server.
+    `initialize` is called on app initialize, both on the client and server.
     On the server, an app is instantiated once for each request, and in the
     client, it's instantiated once on page load.
     
     This is a good place to initialize any code that needs to be available to
     app on both client and server.
      */
-    postInitialize: function() {
+    initialize: function() {
+      var phrases;
+      this.locale = this.locale || 'en';
+      phrases = {
+        en: require("./lang/en"),
+        fr: require("./lang/fr")
+      };
+      this.polyglot = new Polyglot({
+        locale: this.locale,
+        phrases: phrases[this.locale]
+      });
+      moment.lang(this.locale);
+      this.templateAdapter.Handlebars.polyglot = this.polyglot;
 
       /*
       Register our Handlebars helpers.
@@ -33,7 +49,7 @@
       It has a `registerHelpers` method, which allows us to register helper
       modules that can be used on both client & server.
        */
-      this.templateAdapter.registerHelpers(handlebarsHelpers);
+      return this.templateAdapter.registerHelpers(handlebarsHelpers);
     },
 
     /*
@@ -46,7 +62,10 @@
     in order to do things like bind events to the router, as shown below.
      */
     start: function() {
-      Parse.initialize("S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp", "bWEMzR4vYCQvXGhsQRaayQljkhFm3TJiToZ5rBEJ");
+      window.APPID = "S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp";
+      window.JSKEY = "bWEMzR4vYCQvXGhsQRaayQljkhFm3TJiToZ5rBEJ";
+      window.RESTAPIKEY = "bBBa0OPsN8hjkRaKw069oOflBED2PvHowfIQYoiN";
+      Parse.initialize(window.APPID, window.JSKEY);
       this.router.on("action:start", (function() {
         this.set({
           loading: true

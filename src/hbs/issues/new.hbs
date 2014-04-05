@@ -1,0 +1,15 @@
+<div class="container">
+  <h2 class="col-sm-offset-2">{{__ "issues.menu.add_new_issue" }}</h2>
+  <form class="listing-form form-horizontal" enctype="multipart/form-data">
+
+    {{partial "issues/form"}}
+    
+    <div class="form-actions col-sm-offset-2">
+      <button type="submit" class="save btn btn-primary">{{__ "common.actions.save" }}</button>
+      <a href="{{ cancel_path }}" class="cancel btn btn-default">{{__ "common.actions.cancel" }}</a>
+    </div>
+  </form>
+</div>
+
+
+

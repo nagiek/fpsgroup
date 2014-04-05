@@ -1,7 +1,9 @@
 var express = require('express')
   , rendr = require('rendr')
   , Parse = require('parse').Parse
-  , app = express();
+  , app = express()
+  // , i18n = require('node-polyglot')
+  ;
 
 /**
  * Initialize Express middleware stack.
@@ -11,16 +13,19 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.logger());
 app.use(express.bodyParser());
 
+/**
+ * i18n middleware
+ */
+// app.use(i18n({ debug: true }))
+// app.locals(i18n.locals)
 
 /**
  * Keys to connect to Parse.
  */
 var APP_ID =      "S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp"
-  , CLIENT_KEY =  "OcReRafvOmkSy4GrHL9DrTwHLTJpOPhPps21rmYN"
   , JS_KEY =      "bWEMzR4vYCQvXGhsQRaayQljkhFm3TJiToZ5rBEJ"
   , REST_KEY =    "bBBa0OPsN8hjkRaKw069oOflBED2PvHowfIQYoiN"
   ;
-
 
 /**
  * In this simple example, the DataAdapter config, which specifies host, port, etc. of the API

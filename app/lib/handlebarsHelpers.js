@@ -9,6 +9,9 @@ the actual Handlebars instance will come from.
     return {
       copyright: function(year) {
         return new Handlebars.SafeString("&copy;" + year);
+      },
+      __: function(key, options) {
+        return Handlebars.polyglot.t(key, options);
       }
     };
   };
