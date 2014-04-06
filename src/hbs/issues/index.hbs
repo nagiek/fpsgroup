@@ -1,9 +1,18 @@
-<h1>Issues</h1>
+<header>
+  <ul class="list-inline right-sm">
+    <li>
+      <a href="/issues/new" id="new-issue-link" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus"></span> {{__ "issues.actions.new_issue" }}
+      </a>
+    </li>
+  </ul>
+  <h1 class="left-sm">{{__ "issue.meta.className_plural" }}</h1>
+</header>
 
 <ul>
 {{#each models}}
   <li>
-    <a href="/issues/{{owner.login}}/{{name}}">{{name}}</a>, by <a href="/users/{{owner.login}}">{{owner.login}}</a>
+    <a href="/issues/{{ data.longName }}">{{ datalongName }}</a>, by <a href="/users/{{owner.login}}">{{owner.login}}</a>
   </li>
 {{/each}}
 </ul>

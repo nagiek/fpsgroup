@@ -16,7 +16,7 @@ module.exports = (grunt) ->
     copy:
       compile:
         files: [          
-          {expand: true, flatten: true, src: [handlebarsDir + '/*'], dest: 'app/templates/', filter:  (filepath) -> path.basename(filepath).slice(0, 2) is "__"}, # i.e. __layout.hbs.`
+          {expand: true, flatten: true, cwd: handlebarsDir + "/", src: '*', dest: 'app/templates/', filter:  (filepath) -> path.basename(filepath).slice(0, 2) is "__"}, # i.e. __layout.hbs.`
           {expand: true, flatten: true, cwd: "bower_components/bootstrap/dist/css/", src: "bootstrap.min.css", dest: "src/css/vendor"},
           {expand: true, flatten: true, cwd: "bower_components/bootstrap/dist/js/", src: "bootstrap.min.js", dest: "app/lib"},
           {expand: true, flatten: true, cwd: "bower_components/jquery.serializeJSON/", src: "jquery.serializeJSON.min.js", dest: "app/lib"},
