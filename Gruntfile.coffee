@@ -1,8 +1,11 @@
-path = require("path")
+path = require "path"
+
 stylesheetsDir = "src/css/stylesheets"
 coffeeDir = "src/js"
 markdownDir = "src/md"
 handlebarsDir = "src/hbs"
+mergeJSDest = "public/mergedAssets.js"
+
 
 module.exports = (grunt) ->
   
@@ -90,25 +93,19 @@ module.exports = (grunt) ->
         options:
           interrupt: true
 
-      coffees:
-        files: "src/js/**/*.coffee"
+      coffee:
+        files: ["src/js/**/*.coffee"]
         tasks: ["coffee"]
         options:
           interrupt: true
 
-      coffees2:
-        files: "src/js/*.coffee"
-        tasks: ["coffee"]
-        options:
-          interrupt: true
-
-      templates:
+      markdown:
         files: [markdownDir + "/**/*.md"]
         tasks: ["markdown"]
         options:
           interrupt: true
 
-      templates2:
+      handlebars:
         files: [handlebarsDir + "/**/*.hbs"]
         tasks: ["handlebars"]
         options:
@@ -140,9 +137,9 @@ module.exports = (grunt) ->
           #   path: "bower_components/jquery.serializeJSON/jquery.serializeJSON.min.js"
           #   exports: null
 
-      app:
+      compile:
         src: ["app/**/*.js"]
-        dest: "public/mergedAssets.js"
+        dest: mergeJSDest
 
       tests:
         src: [
@@ -151,7 +148,21 @@ module.exports = (grunt) ->
         ]
         dest: "public/testBundle.js"
 
+    watchify:
+      # options:
+      #   detectGlobals: true
+      #   insertGlobals: false
+      #   ignoreMissing: false
+      #   debug: false
+      #   standalone: false
+      #   keepalive: false
+
+      default:
+        src: ["/app/**/*.js"]
+        dest: mergeJSDest
+
   grunt.loadNpmTasks "grunt-browserify"
+  grunt.loadNpmTasks "grunt-watchify"
   grunt.loadNpmTasks "grunt-markdown"
   grunt.loadNpmTasks "grunt-contrib-coffee"
   grunt.loadNpmTasks "grunt-contrib-copy"
@@ -184,9 +195,10 @@ module.exports = (grunt) ->
   
   # Run the server and watch for file changes
   grunt.registerTask "server", [
-    "compile"
+    # "compile"
     "runNode"
     "watch"
+    # "watchify"
   ]
   
   # Default task(s).

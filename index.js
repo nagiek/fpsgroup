@@ -53,7 +53,10 @@ var dataAdapterConfig = {
  * Initialize our Rendr server.
  */
 var server = rendr.createServer({
-  dataAdapterConfig: dataAdapterConfig
+  dataAdapterConfig: dataAdapterConfig,
+  appData: {
+    rootPath: "/"
+  }
 });
 
 /**

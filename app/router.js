@@ -19,21 +19,6 @@
   Router.prototype.constructor = BaseClientRouter;
 
   Router.prototype.postInitialize = function() {
-    $(document).on("click", "a", function(e) {
-      var href;
-      console.log(e);
-      if (e.isDefaultPrevented()) {
-        return;
-      }
-      href = $(this).attr("href");
-      if (href === "#" || (href == null)) {
-        return;
-      }
-      if (href.substring(0, 1) === '/' && href.substring(0, 2) !== '//') {
-        e.preventDefault();
-        return Parse.history.navigate(href, true);
-      }
-    });
     return this.on("action:start", this.trackImpression, this);
   };
 
