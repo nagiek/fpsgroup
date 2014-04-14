@@ -1,2 +1,2 @@
 RendrBase = require("rendr/shared/base/model")
-module.exports = RendrBase.extend("Base", {})
+module.exports = RendrBase.extend "Base", {}

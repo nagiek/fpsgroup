@@ -1,34 +1,56 @@
 BaseView = require("../base")
 moment = require("moment")
+_ = require("underscore")
 Issue = require("../../models/issue")
+Parse = require("parse").Parse
 
 module.exports = BaseView.extend
   className: "issues_new_view"
 
-  el: '.content'
-    
   events:
-    'submit form'                 : 'save'
+    'submit form' : 'save'
     
   initialize : (attrs) ->
 
-    @model = new Issue() unless @model
+    @model = new Issue({}, app: @options.app, collection: @options.collection) unless @model
 
     @listenTo @model, 'invalid', (error) =>
       console.log error
       @$('button.save').button "reset"
-
       msg = i18nCommon.errors.unknown
 
+    @on "save:success", (model) =>
+
+      @app.alert event: 'model-save', fade: true, message: @app.polyglot.t("common.actions.changes_saved"), type: 'success'
+
+      if model.get "public" and not model.get "activity"
+
+        # Create activity
+        activity = new Activity
+          activity_type: "new_#{model.className}"
+          public: true
+          title: model.get "title"
+          subject: Parse.User.current().get("profile")
+          object: model
+
+        activity.save().then (returnedActivity) ->
+          model.save activity: returnedActivity
+      
+      Parse.history.navigate model.getUrl(), true
+
+  getTemplateData: ->
+    # Get `super`.
+    data = BaseView.prototype.getTemplateData.call(this)
+    console.log @model
+    _.extend data,
+      cancelPath: if @model.isNew() then @options.collection.getUrl() else @model.getUrl()
+
   save : (e) ->
-    e.preventDefault()
-    
-    @$('button.save').button "loading"
+
+    # super
+    BaseView::save.apply(this, arguments)
+
     data = @$('form').serializeJSON()
-
-    console.log data
-
-    @$('.has-error').removeClass('has-error')
 
     # Massage the Only-String data from serializeJSON()
     data.issue.rent = 0 if data.issue.rent is '' or data.issue.rent is '0'
@@ -43,13 +65,8 @@ module.exports = BaseView.extend
 
     @model.save attrs,
       success: (model) => 
-        @trigger "save:success", model, newUnit
+        @trigger "save:success", model, _this
       error: (model, error) => 
         @model.trigger "invalid", error
-
-  getTemplateData: ->
-    data = BaseView::getTemplateData.call(this)
-    data.build = @options.build.toJSON()
-    data
 
 module.exports.id = "issues/new"

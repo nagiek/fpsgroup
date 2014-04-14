@@ -51,6 +51,9 @@
        */
       return this.templateAdapter.registerHelpers(handlebarsHelpers);
     },
+    getAppViewClass: function() {
+      return require('./views/app');
+    },
 
     /*
     Client-side only.
@@ -76,7 +79,16 @@
           loading: false
         });
       }), this);
-      BaseApp.prototype.start.call(this);
+      return BaseApp.prototype.start.call(this);
+    },
+
+    /*
+    Client-side only.
+    
+    `alert` is the method used to alert the user of an activity.
+     */
+    alert: function(data) {
+      return this.trigger("alert", data);
     }
   });
 

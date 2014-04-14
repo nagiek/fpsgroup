@@ -16,8 +16,8 @@ module.exports =
         model: "Issue"
         params: params
 
-      build:
-        model: "Build"
+      collection:
+        collection: "Issues"
         params: params
 
     @app.fetch spec, (err, result) ->
@@ -35,10 +35,6 @@ module.exports =
           "language"
           "watchers_count"
         ]
-
-      build:
-        model: "Build"
-        params: params
 
     @app.fetch spec, (err, result) ->
       callback err, result

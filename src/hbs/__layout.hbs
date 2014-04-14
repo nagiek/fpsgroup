@@ -11,18 +11,19 @@
   <body class="">
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/">GitHub Browser</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/issues">Issues</a></li>
-            <li><a href="/users">Users</a></li>
-          </ul>
-          <div class="loading-indicator">Loading&hellip;</div>
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">GitHub Browser</a>
         </div>
-
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/issues">Issues</a></li>
+          <li><a href="/users">Users</a></li>
+        </ul>
+        <div class="loading-indicator">Loading&hellip;</div>
+      </div>
     </div>
+
+    <section id="messages" class="container"></section>
 
     <section id="content" class="container">
       {{{body}}}

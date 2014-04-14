@@ -48,6 +48,8 @@ module.exports = BaseApp.extend(
     ###
     @templateAdapter.registerHelpers handlebarsHelpers
 
+
+  getAppViewClass: -> require('./views/app')
   
   ###
   Client-side only.
@@ -85,5 +87,13 @@ module.exports = BaseApp.extend(
     
     # Call 'super'.
     BaseApp::start.call this
-    return
+
+  ###
+  Client-side only.
+  
+  `alert` is the method used to alert the user of an activity.
+  ###
+  alert: (data) -> 
+    @trigger "alert", data
+
 )

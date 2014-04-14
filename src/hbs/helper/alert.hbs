@@ -1,0 +1,6 @@
+<div id="alert-{{ event }}" class="alert alert-{{ type }}{{#if dismiss }} alert-dismissable{{/if }} fade in">
+  {{#if dismiss }}<button type="button" class="close pull-right" data-dismiss="alert">&times;</button>{{/if }}
+  {{#if heading }}<h4 class="alert-heading">{{ heading }}</h4>{{/if }}
+  {{#if message }}<p class="message">{{ message }}</p>{{/if }}
+  {{#if buttons }}<p class="buttons">{{ buttons }}</p>{{/if }}
+</div>

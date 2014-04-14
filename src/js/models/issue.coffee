@@ -1,7 +1,7 @@
 Base = require("./base")
 module.exports = Base.extend("Issue",
-  url: "/issues/:name"
-  idAttribute: "name"
+  url: "/issues/:title"
+  idAttribute: "title"
 )
 module.exports.id = "Issue"
 module.exports::className = "Issue";
