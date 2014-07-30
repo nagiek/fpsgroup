@@ -6,6 +6,7 @@
     match("issues", "issues#index");
     match("issues/new", "issues#new");
     match("issues/:name", "issues#show");
+    match("issues/:name/edit", "issues#edit");
     match("users", "users#index");
     return match("users/:login", "users#show");
   };

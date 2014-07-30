@@ -84,10 +84,36 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 
-  buffer += "<h1 id=\"welcome-to-github-browser-\">Welcome to GitHub Browser!</h1>\n<p>This is a little app that demonstrates how to use Rendr by consuming GitHub's public Api.</p>\n<p>Check out <a href=\"/repos\">Repos</a> or <a href=\"/users\">Users</a>.</p>\n<p>";
+  buffer += "<h1 id=\"welcome-to-github-browser-\">Welcome to GitHub Browser!</h1>\n<p>This is a little app that demonstrates how to use Rendr by consuming GitHub&#39;s public Api.</p>\n<p>Check out <a href=\"/repos\">Repos</a> or <a href=\"/users\">Users</a>.</p>\n<p>";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.copyright || depth0.copyright),stack1 ? stack1.call(depth0, "2013", options) : helperMissing.call(depth0, "copyright", "2013", options)))
     + "</p>\n";
+  return buffer;
+  });
+
+templates["issues/edit"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function";
+
+
+  buffer += "<div class=\"container\">\n  <h2 class=\"col-sm-offset-2\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issues.menu.edit_issue", options) : helperMissing.call(depth0, "__", "issues.menu.edit_issue", options)))
+    + "</h2>\n  <form class=\"listing-form form-horizontal\" enctype=\"multipart/form-data\">\n\n    ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.partial || depth0.partial),stack1 ? stack1.call(depth0, "issues/form", options) : helperMissing.call(depth0, "partial", "issues/form", options)))
+    + "\n    \n    <div class=\"form-actions col-sm-offset-2\">\n      <button type=\"submit\" class=\"save btn btn-primary\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.save", options) : helperMissing.call(depth0, "__", "common.actions.save", options)))
+    + "</button>\n      <a href=\"";
+  if (stack2 = helpers.cancelPath) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.cancelPath; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\" class=\"cancel btn btn-default\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.cancel", options) : helperMissing.call(depth0, "__", "common.actions.cancel", options)))
+    + "</a>\n    </div>\n  </form>\n</div>";
   return buffer;
   });
 
@@ -119,28 +145,34 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1, stack2;
-  buffer += "\n  <li>\n    <a href=\"/issues/"
-    + escapeExpression(((stack1 = ((stack1 = depth0.data),stack1 == null || stack1 === false ? stack1 : stack1.longName)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+  var buffer = "", stack1;
+  buffer += "\n  <li>\n    <a href=\"/issues/";
+  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
     + "\">";
-  if (stack2 = helpers.datalongName) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.datalongName; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
-    + "</a>, by <a href=\"/users/"
-    + escapeExpression(((stack1 = ((stack1 = depth0.owner),stack1 == null || stack1 === false ? stack1 : stack1.login)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\">"
-    + escapeExpression(((stack1 = ((stack1 = depth0.owner),stack1 == null || stack1 === false ? stack1 : stack1.login)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</a>, by <a href=\"/issues/";
+  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
     + "</a>\n  </li>\n";
   return buffer;
   }
 
-  buffer += "<header>\n  <ul class=\"list-inline right-sm\">\n    <li>\n      <a href=\"/issues/new\" id=\"new-issue-link\" class=\"btn btn-success\">\n        <span class=\"glyphicon glyphicon-plus\"></span> ";
-  options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issues.actions.new_issue", options) : helperMissing.call(depth0, "__", "issues.actions.new_issue", options)))
-    + "\n      </a>\n    </li>\n  </ul>\n  <h1 class=\"left-sm\">";
+  buffer += "<header class=\"clearfix\">\n  <h1 class=\"left-sm\">";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issue.meta.className_plural", options) : helperMissing.call(depth0, "__", "issue.meta.className_plural", options)))
-    + "</h1>\n</header>\n\n<ul>\n";
+    + "</h1>\n  <ul class=\"list-inline left-sm\">\n    <li>\n      <a href=\"/issues/new\" id=\"new-issue-link\" class=\"btn btn-success\">\n        <span class=\"glyphicon glyphicon-plus\"></span> ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issues.actions.new_issue", options) : helperMissing.call(depth0, "__", "issues.actions.new_issue", options)))
+    + "\n      </a>\n    </li>\n  </ul>\n</header>\n\n<ul>\n";
   stack2 = helpers.each.call(depth0, depth0.models, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</ul>\n";
@@ -169,7 +201,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     + "\" class=\"cancel btn btn-default\">";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.cancel", options) : helperMissing.call(depth0, "__", "common.actions.cancel", options)))
-    + "</a>\n    </div>\n  </form>\n</div>\n\n\n\n";
+    + "</a>\n    </div>\n  </form>\n</div>";
   return buffer;
   });
 

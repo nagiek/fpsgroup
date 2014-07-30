@@ -1,18 +1,18 @@
-<header>
-  <ul class="list-inline right-sm">
+<header class="clearfix">
+  <h1 class="left-sm">{{__ "issue.meta.className_plural" }}</h1>
+  <ul class="list-inline left-sm">
     <li>
       <a href="/issues/new" id="new-issue-link" class="btn btn-success">
         <span class="glyphicon glyphicon-plus"></span> {{__ "issues.actions.new_issue" }}
       </a>
     </li>
   </ul>
-  <h1 class="left-sm">{{__ "issue.meta.className_plural" }}</h1>
 </header>
 
 <ul>
 {{#each models}}
   <li>
-    <a href="/issues/{{ data.longName }}">{{ datalongName }}</a>, by <a href="/users/{{owner.login}}">{{owner.login}}</a>
+    <a href="/issues/{{slug}}">{{title}}</a>, by <a href="/issues/{{slug}}">{{title}}</a>
   </li>
 {{/each}}
 </ul>

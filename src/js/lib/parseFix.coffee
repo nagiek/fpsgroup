@@ -97,8 +97,139 @@ Parse.View::remove = ->
   @stopListening()
   @
 
+# Object
+# --------
+
+###
+Pulls "special" fields like objectId, createdAt, etc. out of attrs
+and puts them on "this" directly.  Removes them from attrs.
+@param attrs - A dictionary with the data for this Parse.Object.
+###
+Parse.Object::_mergeMagicFields = (attrs) ->
+  
+  # Check for changes of magic fields.
+  model = this
+  specialFields = [
+    "createdAt"
+    "updatedAt"
+  ]
+  Parse._arrayEach specialFields, (attr) ->
+    if attrs[attr] and not _.isDate(attrs[attr])
+      model[attr] = Parse._parseDate(attrs[attr])
+      # While they may be useful, Parse.com fails if you send these fields via a PUT request.
+      delete attrs[attr]
+
+###
+Sets a hash of model attributes on the object, firing
+<code>"change"</code> unless you choose to silence it.
+
+<p>You can call it with an object containing keys and values, or with one
+key and value.  For example:<pre>
+gameTurn.set({
+player: player1,
+diceRoll: 2
+}, {
+error: function(gameTurnAgain, error) {
+// The set failed validation.
+}
+});
+
+game.set("currentPlayer", player2, {
+error: function(gameTurnAgain, error) {
+// The set failed validation.
+}
+});
+
+game.set("finished", true);</pre></p>
+
+@param {String} key The key to set.
+@param {} value The value to give it.
+@param {Object} options A set of Backbone-like options for the set.
+The only supported options are <code>silent</code>,
+<code>error</code>, and <code>promise</code>.
+@return {Boolean} true if the set succeeded.
+@see Parse.Object#validate
+@see Parse.Error
+###
+Parse.Object::set = (key, val, options) ->
+  attr = undefined
+  attrs = undefined
+  unset = undefined
+  changes = undefined
+  silent = undefined
+  changing = undefined
+  prev = undefined
+  current = undefined
+  return this  unless key?
+  
+  # Handle both `"key", value` and `{key: value}` -style arguments.
+  if typeof key is "object"
+    attrs = key
+    options = val
+  else
+    (attrs = {})[key] = val
+  options or (options = {})
+  
+  # Run validation.
+  return false  unless @_validate(attrs, options)
+
+  @_mergeMagicFields attrs
+  
+  # Extract attributes and options.
+  unset = options.unset
+  silent = options.silent
+  changes = []
+  changing = @_changing
+  @_changing = true
+  unless changing
+    @_previousAttributes = _.clone(@attributes)
+    @changed = {}
+  current = @attributes
+  prev = @_previousAttributes
+
+  
+  # Check for changes of `id`.
+  @id = attrs[@idAttribute]  if @idAttribute of attrs
+  
+  # For each `set` attribute, update or delete the current value.
+  for attr of attrs
+    val = attrs[attr]
+    changes.push attr  unless _.isEqual(current[attr], val)
+    unless _.isEqual(prev[attr], val)
+      @changed[attr] = val
+    else
+      delete @changed[attr]
+    if unset then delete current[attr] else current[attr] = val
+  
+  # Trigger all relevant attribute changes.
+  unless silent
+    @_pending = options  if changes.length
+    i = 0
+    l = changes.length
+
+    while i < l
+      @trigger "change:" + changes[i], this, current[changes[i]], options
+      i++
+  
+  # You might be wondering why there's a `while` loop here. Changes can
+  # be recursively nested within `"change"` events.
+  return this  if changing
+  unless silent
+    while @_pending
+      options = @_pending
+      @_pending = false
+      @trigger "change", this, options
+  @_pending = false
+  @_changing = false
+  this
+
+###
+A model is new if it has never been saved to the server, and lacks an id.
+###
+Parse.Object::isNew = -> !@has @idAttribute
+
 # Collection
-# -------
+# --------
 
 # Default options for `Collection#set`.
 setOptions =
@@ -156,8 +287,8 @@ Parse.Collection::set = (models, options) ->
     if attrs instanceof Parse.Object
       id = model = attrs
     else
-      id = attrs[targetModel::idAttribute]
-    
+      id = attrs[targetModel::idAttribute or 'id']
+
     # If a duplicate is found, prevent it from being added and
     # optionally merge it into the existing model.
     if existing = @get(id)
@@ -229,3 +360,16 @@ Parse.Collection::set = (models, options) ->
   
   # Return the added (or merged) model (or models).
   (if singular then models[0] else models)
+
+# Internal method called every time a model in the set fires an event.
+# Sets need to update their indexes when models change ids. All other
+# events simply proxy through. "add" and "remove" events that originate
+# in other collections are ignored.
+Parse.Collection::_onModelEvent = (event, model, collection, options) ->
+  return  if (event is "add" or event is "remove") and collection isnt this
+  @remove model, options  if event is "destroy"
+  if model and event is "change:" + model.idAttribute
+    delete @_byId[model.previous(model.idAttribute)]
+
+    @_byId[model.id] = model  if model.id?
+  @trigger.apply this, arguments_

@@ -1,18 +1,16 @@
 BaseView = require("../base")
 moment = require("moment")
 _ = require("underscore")
-Issue = require("../../models/issue")
 Parse = require("parse").Parse
 
-module.exports = BaseView.extend
+module.exports = class IssuesNewView extends BaseView
+
   className: "issues_new_view"
 
   events:
     'submit form' : 'save'
     
   initialize : (attrs) ->
-
-    @model = new Issue({}, app: @options.app, collection: @options.collection) unless @model
 
     @listenTo @model, 'invalid', (error) =>
       console.log error
@@ -23,11 +21,11 @@ module.exports = BaseView.extend
 
       @app.alert event: 'model-save', fade: true, message: @app.polyglot.t("common.actions.changes_saved"), type: 'success'
 
-      if model.get "public" and not model.get "activity"
+      if model.get("public") and not model.get("activity")
 
         # Create activity
         activity = new Activity
-          activity_type: "new_#{model.className}"
+          activityType: "new_#{model.className}"
           public: true
           title: model.get "title"
           subject: Parse.User.current().get("profile")
@@ -41,9 +39,8 @@ module.exports = BaseView.extend
   getTemplateData: ->
     # Get `super`.
     data = BaseView.prototype.getTemplateData.call(this)
-    console.log @model
     _.extend data,
-      cancelPath: if @model.isNew() then @options.collection.getUrl() else @model.getUrl()
+      cancelPath: if @model.isNew() then @options.collection.url else @model.getUrl()
 
   save : (e) ->
 
@@ -56,16 +53,19 @@ module.exports = BaseView.extend
     data.issue.rent = 0 if data.issue.rent is '' or data.issue.rent is '0'
     data.issue.rent = Number data.issue.rent if data.issue.rent
 
-    for attr in ['start_date', 'end_date']
+    for attr in ['startDate', 'endDate']
       # Instead of "ll", might have to use "moment.langData().longDateFormat()"
-      data.issue[attr] = moment(data.issue[attr], "ll").toDate() unless data.issue[attr] is ''
-      data.issue[attr] = new Date if typeof data.issue[attr] is 'string'
+      if typeof data.issue[attr] is 'string' and data.issue[attr] isnt ''
+        data.issue[attr] = moment(data.issue[attr], "ll").toDate()
     
-    attrs = data.issue
+    data.issue.slug = _.slugify data.issue.title
 
-    @model.save attrs,
+    @model.save data.issue,
       success: (model) => 
-        @trigger "save:success", model, _this
+        console.log @model
+        debugger
+        @model.trigger "save:success"
+        @trigger "save:success", model, @
       error: (model, error) => 
         @model.trigger "invalid", error
 

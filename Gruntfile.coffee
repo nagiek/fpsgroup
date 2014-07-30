@@ -17,19 +17,18 @@ module.exports = (grunt) ->
       compile:
         files: [          
           {expand: true, flatten: true, cwd: handlebarsDir + "/", src: '*', dest: 'app/templates/', filter:  (filepath) -> path.basename(filepath).slice(0, 2) is "__"}, # i.e. __layout.hbs.`
-          {expand: true, flatten: true, cwd: "bower_components/bootstrap/dist/css/", src: "bootstrap.min.css", dest: "src/css/vendor"},
           {expand: true, flatten: true, cwd: "bower_components/bootstrap/dist/js/", src: "bootstrap.min.js", dest: "app/lib"},
           {expand: true, flatten: true, cwd: "bower_components/jquery.serializeJSON/", src: "jquery.serializeJSON.min.js", dest: "app/lib"},
         ]
 
-    stylus:
+    less:
       compile:
         options:
           paths: [stylesheetsDir]
           "include css": true
 
         files:
-          "public/styles.css": stylesheetsDir + "/index.styl"
+          "public/styles.css": stylesheetsDir + "/index.less"
 
     coffee:
       compile:
@@ -113,10 +112,10 @@ module.exports = (grunt) ->
 
       stylesheets:
         files: [
-          stylesheetsDir + "/**/*.styl"
+          stylesheetsDir + "/**/*.less"
           stylesheetsDir + "/**/*.css"
         ]
-        tasks: ["stylus"]
+        tasks: ["less"]
         options:
           interrupt: true
 
@@ -167,7 +166,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-coffee"
   grunt.loadNpmTasks "grunt-contrib-copy"
   grunt.loadNpmTasks "grunt-contrib-handlebars"
-  grunt.loadNpmTasks "grunt-contrib-stylus"
+  grunt.loadNpmTasks "grunt-contrib-less"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.registerTask "runNode", ->
     grunt.util.spawn
@@ -187,10 +186,10 @@ module.exports = (grunt) ->
   grunt.registerTask "compile", [
     "copy"
     "coffee"
-    "markdown"
+    # "markdown"
     "handlebars"
     "browserify"
-    "stylus"
+    "less"
   ]
   
   # Run the server and watch for file changes

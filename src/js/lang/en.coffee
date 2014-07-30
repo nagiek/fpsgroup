@@ -22,3 +22,4 @@ module.exports =
   "issue.fields.title":             "Title"
   "issue.form.title_help":          "Put in a good title"
   "issues.menu.add_new_issue":      "Add new issue"
+  "issues.menu.edit_issue":         "Edit issue"

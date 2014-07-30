@@ -6,11 +6,21 @@ module.exports =
 
     @app.fetch spec, (err, result) ->
       callback err, result
-      return
-
-    return
 
   new: (params, callback) ->
+
+    spec =
+      model:
+        model: "Issue"
+
+      collection:
+        collection: "Issues"
+        params: params
+
+    @app.fetch spec, (err, result) ->
+      callback err, result
+      
+  edit: (params, callback) ->
     spec =
       model:
         model: "Issue"
@@ -22,9 +32,6 @@ module.exports =
 
     @app.fetch spec, (err, result) ->
       callback err, result
-      return
-
-    return
 
   show: (params, callback) ->
     spec =
@@ -38,6 +45,3 @@ module.exports =
 
     @app.fetch spec, (err, result) ->
       callback err, result
-      return
-
-    return

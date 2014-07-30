@@ -1,5 +1,5 @@
 (function() {
-  var BaseApp, Parse, Polyglot, handlebarsHelpers, moment;
+  var BaseApp, Parse, Polyglot, handlebarsHelpers, moment, _;
 
   BaseApp = require("rendr/shared/app");
 
@@ -10,6 +10,12 @@
   moment = require("moment");
 
   Polyglot = require("node-polyglot");
+
+  _ = require('underscore');
+
+  _.str = require('underscore.string');
+
+  _.mixin(_.str.exports());
 
 
   /*
