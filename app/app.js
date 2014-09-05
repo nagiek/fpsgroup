@@ -71,9 +71,9 @@
     in order to do things like bind events to the router, as shown below.
      */
     start: function() {
-      window.APPID = "S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp";
-      window.JSKEY = "bWEMzR4vYCQvXGhsQRaayQljkhFm3TJiToZ5rBEJ";
-      window.RESTAPIKEY = "bBBa0OPsN8hjkRaKw069oOflBED2PvHowfIQYoiN";
+      window.APPID = "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v";
+      window.JSKEY = "bY8kXjylVf3x2nev6Kq2UjMt91fNZFiMsGF5b1h5";
+      window.RESTAPIKEY = "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC";
       Parse.initialize(window.APPID, window.JSKEY);
       this.router.on("action:start", (function() {
         this.set({

@@ -8,3 +8,6 @@ module.exports = RendrView.extend
     e.preventDefault()
     @$('button.save').button "loading"
     @$('.has-error').removeClass('has-error')
+
+  # to be overwritten
+  getSaveData: ->

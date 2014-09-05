@@ -8,7 +8,8 @@
       e.preventDefault();
       this.$('button.save').button("loading");
       return this.$('.has-error').removeClass('has-error');
-    }
+    },
+    getSaveData: function() {}
   });
 
 }).call(this);

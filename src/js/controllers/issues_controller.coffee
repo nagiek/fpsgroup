@@ -4,6 +4,8 @@ module.exports =
       collection: "Issues"
       params: params
 
+    console.log("index");
+
     @app.fetch spec, (err, result) ->
       callback err, result
 
@@ -38,10 +40,6 @@ module.exports =
       model:
         model: "Issue"
         params: params
-        ensureKeys: [
-          "language"
-          "watchers_count"
-        ]
 
     @app.fetch spec, (err, result) ->
       callback err, result

@@ -1,25 +1,26 @@
 (function() {
-  var RendrBase, _;
+  var RendrBase;
 
   RendrBase = require("rendr/shared/base/model");
 
-  _ = require("underscore");
-
   module.exports = RendrBase.extend("Base", {
     idAttribute: "objectId",
-    constructor: function() {
-      console.log("constructor");
-      RendrBase.prototype.constructor.apply(this, arguments);
-      this.on('save:success', this.updateModelOrCollectionStore, this);
-      return this.on('destroy', this.updateModelOrCollectionStore, this);
-    },
-    storeModelOrCollection: function() {
-      console.log("updateModelOrCollectionStore");
-      if (this.collection) {
-        return this.collection.store();
-      } else {
-        return this.store();
-      }
+    save: function(attrs, options) {
+      var success;
+      options = options ? _.clone(options) : {};
+      success = options.success;
+      options.success = (function(_this) {
+        return function(nextModel, resp, xhr) {
+          _this.store();
+          if (_this.collection) {
+            _this.app.fetcher.collectionStore.set(_this.collection);
+          }
+          if (success) {
+            return success(nextModel, resp);
+          }
+        };
+      })(this);
+      return RendrBase.prototype.save.apply(this, arguments);
     }
   });
 

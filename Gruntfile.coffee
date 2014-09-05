@@ -1,6 +1,7 @@
 path = require "path"
 
 stylesheetsDir = "src/css/stylesheets"
+cloudDir = "cloud"
 coffeeDir = "src/js"
 markdownDir = "src/md"
 handlebarsDir = "src/hbs"
@@ -38,7 +39,13 @@ module.exports = (grunt) ->
           src: ['**/*.coffee']
           dest: 'app'
           ext: '.js'
-        }]
+        },
+          expand: true
+          cwd: cloudDir
+          src: ['**/*.coffee']
+          dest: cloudDir
+          ext: '.js'
+        ]
 
     handlebars:
       compile:

@@ -22,9 +22,9 @@ app.use(express.bodyParser());
 /**
  * Keys to connect to Parse.
  */
-var APP_ID =      "S3u3s87Sng5OBo9YjFh6PuJIEnicbld6YYjojbGp"
-  , JS_KEY =      "bWEMzR4vYCQvXGhsQRaayQljkhFm3TJiToZ5rBEJ"
-  , REST_KEY =    "bBBa0OPsN8hjkRaKw069oOflBED2PvHowfIQYoiN"
+var APP_ID =      "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v"
+  , JS_KEY =      "bY8kXjylVf3x2nev6Kq2UjMt91fNZFiMsGF5b1h5"
+  , REST_KEY =    "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC"
   ;
 
 /**
