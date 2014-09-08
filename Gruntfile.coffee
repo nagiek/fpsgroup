@@ -1,4 +1,5 @@
 path = require "path"
+marked = require "marked"
 
 stylesheetsDir = "src/css/stylesheets"
 cloudDir = "cloud"
@@ -20,6 +21,7 @@ module.exports = (grunt) ->
           {expand: true, flatten: true, cwd: handlebarsDir + "/", src: '*', dest: 'app/templates/', filter:  (filepath) -> path.basename(filepath).slice(0, 2) is "__"}, # i.e. __layout.hbs.`
           {expand: true, flatten: true, cwd: "bower_components/bootstrap/dist/js/", src: "bootstrap.min.js", dest: "app/lib"},
           {expand: true, flatten: true, cwd: "bower_components/jquery.serializeJSON/", src: "jquery.serializeJSON.min.js", dest: "app/lib"},
+          {expand: true, flatten: true, cwd: "bower_components/bootstrap-datepicker/js/", src: "bootstrap-datepicker.js", dest: "app/lib"},
         ]
 
     less:
@@ -68,14 +70,11 @@ module.exports = (grunt) ->
       compile:
         options:
           template: false
-          markdownOptions: 
+          markdownOptions:
+            # ensure we handle quotes properly, otherwise the
+            # handlesbars file will not have correct arguments. 
+            renderer: new marked.Renderer()
             gfm: true
-            tables: true
-            breaks: false
-            pedantic: false
-            sanitize: false
-            smartLists: true
-            smartypants: false
         files: [
           {
             expand: true,
@@ -193,7 +192,7 @@ module.exports = (grunt) ->
   grunt.registerTask "compile", [
     "copy"
     "coffee"
-    # "markdown"
+    "markdown"
     "handlebars"
     "browserify"
     "less"

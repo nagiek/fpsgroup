@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "FPSGroup": {
+            "applicationId": "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v", 
+            "masterKey": "sPLCFVwzxzC2A5p2b214LCCeHDoIc9LnWv6Hf4Ya"
+        }, 
+        "_default": {
+            "link": "FPSGroup"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.19"
+    }
+}

@@ -7,6 +7,6 @@ module.exports = Base.extend "Issue",
   defaults:
     title: "hello"
     slug: "hello"
-  url: "/issues/:slug"
+  url: "/issues/:objectId/:slug"
 
 module.exports.id = "Issue"

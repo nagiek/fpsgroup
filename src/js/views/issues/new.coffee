@@ -23,11 +23,13 @@ module.exports = class IssuesNewView extends BaseView
     @listenTo @collection, 'invalid', (error) =>
       console.log error
       @$('button.save').button "reset"
-      msg = i18nCommon.errors.unknown
+      msg = @app.polyglot.t("common.errors.unknown")
+      @app.alert event: 'model-error', fade: true, message: msg, type: 'error'
 
     @on "save:success", (model) =>
 
-      @app.alert event: 'model-save', fade: true, message: @app.polyglot.t("common.actions.changes_saved"), type: 'success'
+      msg = @app.polyglot.t("common.actions.changes_saved")
+      @app.alert event: 'model-save', fade: true, message: msg, type: 'success'
 
       # Only make an activity for new models
       if model.get("public") and not model.get("activity")
@@ -45,6 +47,10 @@ module.exports = class IssuesNewView extends BaseView
       
       Parse.history.navigate model.getUrl(), true
 
+
+  postRender : ->
+    @$('.datepicker').datepicker()
+
   getTemplateData: ->
     # Get `super`.
     data = BaseView.prototype.getTemplateData.call(this)
@@ -57,6 +63,10 @@ module.exports = class IssuesNewView extends BaseView
 
     data = @$('form').serializeJSON()    
     data.issue.slug = _.slugify data.issue.title
+
+    format = @app.polyglot.t("common.dates.formats.datepicker")
+    data.issue.issuanceDate = moment(data.issue.issuanceDate, format).toDate()
+    data.issue.maturityDate = moment(data.issue.maturityDate, format).toDate()
 
     data
 

@@ -10,6 +10,6 @@
     url: "/users"
   });
 
-  module.exports.id = "Users";
+  module.exports.id = "users";
 
 }).call(this);

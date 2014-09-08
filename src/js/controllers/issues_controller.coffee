@@ -4,8 +4,6 @@ module.exports =
       collection: "Issues"
       params: params
 
-    console.log("index");
-
     @app.fetch spec, (err, result) ->
       callback err, result
 
@@ -30,7 +28,6 @@ module.exports =
 
       collection:
         collection: "Issues"
-        params: params
 
     @app.fetch spec, (err, result) ->
       callback err, result

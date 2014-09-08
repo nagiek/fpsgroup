@@ -15,7 +15,7 @@ _.mixin _.str.exports()
 ###
 Extend the `BaseApp` class, adding any custom methods or overrides.
 ###
-module.exports = BaseApp.extend(
+module.exports = BaseApp.extend
   
   ###
   Client and server.
@@ -42,7 +42,7 @@ module.exports = BaseApp.extend(
       phrases: phrases[@locale]
 
     # Configure moment.js
-    moment.lang @locale
+    moment.locale @locale
 
     # Save a reference to our locale
     @templateAdapter.Handlebars.polyglot = @polyglot
@@ -103,5 +103,3 @@ module.exports = BaseApp.extend(
   ###
   alert: (data) -> 
     @trigger "alert", data
-
-)

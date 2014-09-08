@@ -4,4 +4,4 @@ module.exports = Base.extend(
   model: Issue
   url: "/issues"
 )
-module.exports.id = "Issues"
+module.exports.id = "issues"

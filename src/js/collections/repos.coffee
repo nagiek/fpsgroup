@@ -8,4 +8,4 @@ module.exports = Base.extend(
     else
       "/repositories"
 )
-module.exports.id = "Repos"
+module.exports.id = "repos"

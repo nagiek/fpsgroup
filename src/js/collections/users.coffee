@@ -4,4 +4,4 @@ module.exports = Base.extend(
   model: User
   url: "/users"
 )
-module.exports.id = "Users"
+module.exports.id = "users"

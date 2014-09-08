@@ -8,3 +8,21 @@
     </div>
   </div>
 </fieldset>
+
+<fieldset>
+  <div class="col-sm-offset-2 col-sm-10">
+    <div class="row"><legend class="col-sm-8">{{__ "common.nouns.dates" }}</legend></div>
+  </div>
+  <div class="date-group form-group">
+    <label for="issuanceDate" class="control-label control-label-lg col-sm-2">{{__ "issue.fields.issuanceDate" }}</label>
+    <div class="col-xs-6">
+      <input type="date" class="form-control datepicker" name="issue[issuanceDate]" maxlength="10" value="{{ issuanceDate }}" data-date="{{ issuanceDate }}" data-date-format="{{__ "common.dates.formats.datepicker" }}"  />
+    </div>
+  </div>
+  <div class="date-group form-group">
+    <label for="maturityDate" class="control-label control-label-lg col-sm-2">{{__ "issue.fields.maturityDate" }}</label>
+    <div class="col-xs-6">
+      <input type="date" class="form-control datepicker"   name="issue[maturityDate]"   maxlength="10" value="{{ maturityDate }}" data-date="{{ maturityDate }}" data-date-format="{{__ "common.dates.formats.datepicker" }}"  />
+    </div>
+  </div>
+</fieldset>

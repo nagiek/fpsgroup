@@ -16,6 +16,6 @@
     }
   });
 
-  module.exports.id = "Repos";
+  module.exports.id = "repos";
 
 }).call(this);

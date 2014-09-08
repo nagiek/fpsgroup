@@ -45,7 +45,7 @@
         locale: this.locale,
         phrases: phrases[this.locale]
       });
-      moment.lang(this.locale);
+      moment.locale(this.locale);
       this.templateAdapter.Handlebars.polyglot = this.polyglot;
 
       /*
