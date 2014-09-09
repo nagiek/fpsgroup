@@ -28,6 +28,18 @@ the actual Handlebars instance will come from.
           format = "LL";
         }
         return moment.duration(context.iso).format(format);
+      },
+      datepicker: function(context) {
+        var format;
+        if (context != null) {
+          format = Handlebars.polyglot.t("common.dates.formats.output");
+          return moment(context.iso).format(format);
+        } else {
+          return "";
+        }
+      },
+      log: function(variable) {
+        return console.log(variable);
       }
     };
   };

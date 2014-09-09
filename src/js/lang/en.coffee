@@ -10,14 +10,15 @@ module.exports =
   "common.classes.issues":                      "Issues"
             
   "common.actions.save":                        "Save"
+  "common.actions.edit":                        "Edit"
   "common.actions.cancel":                      "Cancel"
   "common.actions.changes_saved":               "Changes saved"
 
   "common.nouns.dates":                         "Dates"
             
   "common.dates.formats.medium":                "MMM D, YYYY"
-  "common.dates.formats.datepicker":            "yyyy-mm-dd"
-  # "common.dates.formats.datepicker":            "mm/dd/yyyy"
+  "common.dates.formats.input":                 "yyyy-mm-dd"
+  "common.dates.formats.output":                "YYYY-MM-DD"
             
   ## Issues ##            
   "issue.meta.className":                       "Issue"

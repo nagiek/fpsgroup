@@ -26,3 +26,13 @@ module.exports = (Handlebars) ->
   duration: (context, format) ->
     if typeof format isnt "String" then format = "LL"
     moment.duration(context.iso).format(format)
+
+  datepicker: (context) ->
+    if context?
+      format = Handlebars.polyglot.t("common.dates.formats.output")
+      moment(context.iso).format(format)
+    else
+      ""
+
+
+  log: (variable) -> console.log variable

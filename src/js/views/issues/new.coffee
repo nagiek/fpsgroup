@@ -2,6 +2,7 @@ BaseView = require("../base")
 moment = require("moment")
 _ = require("underscore")
 Parse = require("parse").Parse
+# Modernizr = require("../../../bower_components/modernizr/modernizr")
 Issue = require("../../models/issue")
 
 module.exports = class IssuesNewView extends BaseView
@@ -49,6 +50,7 @@ module.exports = class IssuesNewView extends BaseView
 
 
   postRender : ->
+    # unless Modernizr.inputtypes.date
     @$('.datepicker').datepicker()
 
   getTemplateData: ->
@@ -64,13 +66,15 @@ module.exports = class IssuesNewView extends BaseView
     data = @$('form').serializeJSON()    
     data.issue.slug = _.slugify data.issue.title
 
-    format = @app.polyglot.t("common.dates.formats.datepicker")
+    format = @app.polyglot.t("common.dates.formats.output")
     data.issue.issuanceDate = moment(data.issue.issuanceDate, format).toDate()
     data.issue.maturityDate = moment(data.issue.maturityDate, format).toDate()
 
     data
 
   save : (e) ->
+
+    console.log "new"
 
     # super
     BaseView::save.apply(this, arguments)

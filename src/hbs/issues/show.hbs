@@ -1,19 +1,28 @@
-<h1 id="-title-">{{title}}</h1>
+<div class="clearfix">
+  <h1 id="-title-">{{title}}</h1>
+  <ul class="list-inline left-sm">
+    <li>
+      <a href="/issues/{{objectId}}/{{slug}}/edit" id="edit-issue-link" class="btn btn-default">
+        <span class="glyphicon glyphicon-edit"></span> {{__ "common.actions.edit" }}
+      </a>
+    </li>
+  </ul>
+</div>
 <table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Issuance Date</td>
-<td>{{moment issuanceDate}}</td>
-</tr>
-<tr>
-<td>Maturity Date</td>
-<td>{{moment maturityDate}}</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Explanation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Issuance Date</td>
+      <td>{{moment issuanceDate}}</td>
+    </tr>
+    <tr>
+      <td>Maturity Date</td>
+      <td>{{moment maturityDate}}</td>
+    </tr>
+  </tbody>
 </table>

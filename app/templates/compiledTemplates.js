@@ -126,8 +126,10 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   buffer += "<!-- form-xlarge -->\n<fieldset>\n  <div class=\"form-group title-group\">\n    <label for=\"issue-title\" class=\"control-label control-label-lg col-sm-2\">";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issue.fields.title", options) : helperMissing.call(depth0, "__", "issue.fields.title", options)))
-    + "</label>\n    <div class=\"col-sm-10 col-md-8\">\n      <input type=\"text\" class=\"form-control input-lg\" name=\"issue[title]\" id=\"issue-title\" maxlength=\"128\" value=\""
-    + escapeExpression(((stack1 = ((stack1 = depth0.issue),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</label>\n    <div class=\"col-sm-10 col-md-8\">\n      <input type=\"text\" class=\"form-control input-lg\" name=\"issue[title]\" id=\"issue-title\" maxlength=\"128\" value=\"";
+  if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "\" placeholder=\"";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issue.fields.title", options) : helperMissing.call(depth0, "__", "issue.fields.title", options)))
@@ -140,31 +142,27 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     + "</legend></div>\n  </div>\n  <div class=\"date-group form-group\">\n    <label for=\"issuanceDate\" class=\"control-label control-label-lg col-sm-2\">";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issue.fields.issuanceDate", options) : helperMissing.call(depth0, "__", "issue.fields.issuanceDate", options)))
-    + "</label>\n    <div class=\"col-xs-6\">\n      <input type=\"date\" class=\"form-control datepicker\" name=\"issue[issuanceDate]\" maxlength=\"10\" value=\"";
-  if (stack2 = helpers.issuanceDate) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.issuanceDate; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
+    + "</label>\n    <div class=\"col-xs-6\">\n      <input type=\"text\" class=\"form-control datepicker\" name=\"issue[issuanceDate]\" maxlength=\"10\" value=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.datepicker || depth0.datepicker),stack1 ? stack1.call(depth0, depth0.issuanceDate, options) : helperMissing.call(depth0, "datepicker", depth0.issuanceDate, options)))
     + "\" data-date=\"";
-  if (stack2 = helpers.issuanceDate) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.issuanceDate; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.datepicker || depth0.datepicker),stack1 ? stack1.call(depth0, depth0.issuanceDate, options) : helperMissing.call(depth0, "datepicker", depth0.issuanceDate, options)))
     + "\" data-date-format=\"";
   options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.dates.formats.datepicker", options) : helperMissing.call(depth0, "__", "common.dates.formats.datepicker", options)))
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.dates.formats.input", options) : helperMissing.call(depth0, "__", "common.dates.formats.input", options)))
     + "\"  />\n    </div>\n  </div>\n  <div class=\"date-group form-group\">\n    <label for=\"maturityDate\" class=\"control-label control-label-lg col-sm-2\">";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issue.fields.maturityDate", options) : helperMissing.call(depth0, "__", "issue.fields.maturityDate", options)))
-    + "</label>\n    <div class=\"col-xs-6\">\n      <input type=\"date\" class=\"form-control datepicker\"   name=\"issue[maturityDate]\"   maxlength=\"10\" value=\"";
-  if (stack2 = helpers.maturityDate) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.maturityDate; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
+    + "</label>\n    <div class=\"col-xs-6\">\n      <input type=\"text\" class=\"form-control datepicker\" name=\"issue[maturityDate]\" maxlength=\"10\" value=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.datepicker || depth0.datepicker),stack1 ? stack1.call(depth0, depth0.maturityDate, options) : helperMissing.call(depth0, "datepicker", depth0.maturityDate, options)))
     + "\" data-date=\"";
-  if (stack2 = helpers.maturityDate) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.maturityDate; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.datepicker || depth0.datepicker),stack1 ? stack1.call(depth0, depth0.maturityDate, options) : helperMissing.call(depth0, "datepicker", depth0.maturityDate, options)))
     + "\" data-date-format=\"";
   options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.dates.formats.datepicker", options) : helperMissing.call(depth0, "__", "common.dates.formats.datepicker", options)))
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.dates.formats.input", options) : helperMissing.call(depth0, "__", "common.dates.formats.input", options)))
     + "\"  />\n    </div>\n  </div>\n</fieldset>";
   return buffer;
   });
@@ -238,17 +236,28 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
 
-  buffer += "<h1 id=\"-title-\">";
+  buffer += "<div class=\"clearfix\">\n  <h1 id=\"-title-\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h1>\n<table>\n<thead>\n<tr>\n<th>Attribute</th>\n<th>Explanation</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Issuance Date</td>\n<td>";
+    + "</h1>\n  <ul class=\"list-inline left-sm\">\n    <li>\n      <a href=\"/issues/";
+  if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/edit\" id=\"edit-issue-link\" class=\"btn btn-default\">\n        <span class=\"glyphicon glyphicon-edit\"></span> ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.edit", options) : helperMissing.call(depth0, "__", "common.actions.edit", options)))
+    + "\n      </a>\n    </li>\n  </ul>\n</div>\n<table>\n  <thead>\n    <tr>\n      <th>Attribute</th>\n      <th>Explanation</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Issuance Date</td>\n      <td>";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.moment || depth0.moment),stack1 ? stack1.call(depth0, depth0.issuanceDate, options) : helperMissing.call(depth0, "moment", depth0.issuanceDate, options)))
-    + "</td>\n</tr>\n<tr>\n<td>Maturity Date</td>\n<td>";
+    + "</td>\n    </tr>\n    <tr>\n      <td>Maturity Date</td>\n      <td>";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.moment || depth0.moment),stack1 ? stack1.call(depth0, depth0.maturityDate, options) : helperMissing.call(depth0, "moment", depth0.maturityDate, options)))
-    + "</td>\n</tr>\n</tbody>\n</table>\n";
+    + "</td>\n    </tr>\n  </tbody>\n</table>\n";
   return buffer;
   });
 
