@@ -10,14 +10,11 @@ module.exports =
   new: (params, callback) ->
 
     spec =
-      model:
-        model: "Issue"
-
       collection:
         collection: "Issues"
-        params: params
 
-    @app.fetch spec, (err, result) ->
+    @app.fetch spec, (err, result) =>
+      result.model = @app.modelUtils.getModel "issue"
       callback err, result
       
   edit: (params, callback) ->
