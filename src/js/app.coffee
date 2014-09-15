@@ -28,6 +28,13 @@ module.exports = BaseApp.extend
   app on both client and server.
   ###
   initialize: ->
+
+    APPID =      "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v"
+    JSKEY =      "bY8kXjylVf3x2nev6Kq2UjMt91fNZFiMsGF5b1h5"
+    RESTAPIKEY = "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC"
+    
+    # Javascript Key
+    Parse.initialize APPID, JSKEY
     
     # Set the locale
     # Give the templateAdapter access to the locale.
@@ -70,13 +77,6 @@ module.exports = BaseApp.extend
   ###
   start: ->
 
-    window.APPID =      "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v"
-    window.JSKEY =      "bY8kXjylVf3x2nev6Kq2UjMt91fNZFiMsGF5b1h5"
-    window.RESTAPIKEY = "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC"
-    
-    # Javascript Key
-    Parse.initialize window.APPID, window.JSKEY
-
     # Always include these headers, unless otherwise noted.
     # if window isnt undefined and window.$ isnt undefined
     #   window.$.ajaxSetup beforeSend: (jqXHR, settings) ->
@@ -92,7 +92,7 @@ module.exports = BaseApp.extend
       @set loading: false
       return
     ), this
-    
+
     # Call 'super'.
     BaseApp::start.call this
 

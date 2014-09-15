@@ -19,7 +19,7 @@ module.exports = class IssuesNewView extends BaseView
   
   # @collection will not be in initialize, as we have not hydrated the view.
   # Therefore, delay adding events until preRender (which comes after hydrate).
-  preRender : ->
+  postRender : ->
 
     @listenTo @collection, 'invalid', (error) =>
       console.log error
@@ -48,8 +48,6 @@ module.exports = class IssuesNewView extends BaseView
       
       Parse.history.navigate model.getUrl(), true
 
-
-  postRender : ->
     # unless Modernizr.inputtypes.date
     @$('.datepicker').datepicker()
 
@@ -73,8 +71,6 @@ module.exports = class IssuesNewView extends BaseView
     data
 
   save : (e) ->
-
-    console.log "new"
 
     # super
     BaseView::save.apply(this, arguments)

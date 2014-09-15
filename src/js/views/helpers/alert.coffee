@@ -46,4 +46,4 @@ module.exports = BaseView.extend
       delete this
     , 150
 
-module.exports.id = "helper/alert"
+module.exports.id = "helpers/alert"

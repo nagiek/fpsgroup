@@ -1,0 +1,31 @@
+<div class="container">
+  <form id="signup-modal-form" class="modal-dialog modal-form modal-large">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="signup-label" class="modal-title inline-block">{{__ "user.actions.signup" }}</h3>
+        <p class="inline-block">(<a id="switch-login" href="/account/login">{{__ "user.actions.switch_login" }}</a>)</p>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" style="display:none"></div>
+        <fieldset>
+          <legend class="text-center">{{__ "user.actions.sign_up_with_email" }}</legend>
+          <div class="form-group username-group">
+            <label for="signup-username" class="control-label element-invisible">{{__ "user.form.email" }}:</label>
+            <div class="controls">
+              <input type="email" name="signup-username" id="signup-username" class="form-control input-lg" placeholder="{{__ "user.form.email" }}">
+            </div>
+          </div>
+          <div class="form-group password-group">
+            <label for="signup-password" class="control-label element-invisible">{{__ "user.form.password" }}:</label>
+            <div class="controls">
+              <input type="password" name="signup-password" id="signup-password" class="form-control input-lg" placeholder="{{__ "user.form.password" }}">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">{{__ "user.actions.signup" }}</button>
+      </div>
+    </div>
+  </form>
+</div>

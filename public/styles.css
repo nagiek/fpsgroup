@@ -6573,7 +6573,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 [data-view] .loading {
   opacity: 0.5;
 }
-#messages {
+#alerts {
   position: fixed;
   z-index: 1030;
   text-align: center;

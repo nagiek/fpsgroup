@@ -1,0 +1,19 @@
+<div class="container">
+  <h2 class="col-sm-offset-2">{{__ "user.menu.edit_profile" }}</h2>
+  <form class="listing-form form-horizontal" enctype="multipart/form-data">
+
+    <fieldset>
+      <div class="form-group name-group">
+        <label for="profile-name" class="control-label control-label-lg col-sm-2">{{__ "common.fields.name" }}</label>
+        <div class="col-sm-10 col-md-8">
+          <input type="text" class="form-control input-lg" name="profile[name]" id="profile-name" maxlength="128" value="{{ name }}" placeholder="{{__ "common.fields.name" }}" required="required" />
+        </div>
+      </div>
+    </fieldset>
+    
+    <div class="form-actions col-sm-offset-2">
+      <button type="submit" class="save btn btn-primary">{{__ "common.actions.save" }}</button>
+      <a href="{{ cancelPath }}" class="cancel btn btn-default">{{__ "common.actions.cancel" }}</a>
+    </div>
+  </form>
+</div>

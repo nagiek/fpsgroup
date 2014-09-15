@@ -35,7 +35,11 @@
     app on both client and server.
      */
     initialize: function() {
-      var phrases;
+      var APPID, JSKEY, RESTAPIKEY, phrases;
+      APPID = "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v";
+      JSKEY = "bY8kXjylVf3x2nev6Kq2UjMt91fNZFiMsGF5b1h5";
+      RESTAPIKEY = "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC";
+      Parse.initialize(APPID, JSKEY);
       this.locale = this.locale || 'en';
       phrases = {
         en: require("./lang/en"),
@@ -71,10 +75,6 @@
     in order to do things like bind events to the router, as shown below.
      */
     start: function() {
-      window.APPID = "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v";
-      window.JSKEY = "bY8kXjylVf3x2nev6Kq2UjMt91fNZFiMsGF5b1h5";
-      window.RESTAPIKEY = "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC";
-      Parse.initialize(window.APPID, window.JSKEY);
       this.router.on("action:start", (function() {
         this.set({
           loading: true

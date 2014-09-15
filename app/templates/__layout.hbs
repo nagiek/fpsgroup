@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 
   <head>
     <meta charset='utf-8'/>
@@ -8,26 +8,37 @@
     <link href="/styles.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
 
-  <body class="">
+  <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="/">GitHub Browser</a>
         </div>
-        <ul class="nav navbar-nav">
+        <ul id="primary-nav" class="nav navbar-nav left-sm hidden-xs">
           <li><a href="/">Home</a></li>
           <li><a href="/issues">Issues</a></li>
-          <li><a href="/users">Users</a></li>
         </ul>
+        {{view "users/menu"}}
+        <div id="search-menu" class="navbar-collapse collapse navbar-left clearfix">        
+          <form class="navbar-form form-search">
+            <button type="button" class="btn btn-link hidden-sm">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+            <label class="sr-only">Search</label>
+            <input class="form-control search-query" type="text" name="q" placeholder="Search" autocomplete="off" spellcheck="off">
+          </form>
+        </div>
         <div class="loading-indicator">Loading&hellip;</div>
       </div>
     </div>
 
-    <section id="messages" class="container"></section>
+    <section id="alerts" class="container"></section>
 
     <section id="content" class="container">
       {{{body}}}
     </section>
+
+    {{view "users/loggedoutmodals"}}
 
     <script src="/mergedAssets.js"></script>
     <script>

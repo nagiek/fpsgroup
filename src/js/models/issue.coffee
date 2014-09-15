@@ -4,9 +4,6 @@ module.exports = Base.extend "Issue",
   idAttribute: "objectId"
   
   className: "Issue"
-  defaults:
-    title: "hello"
-    slug: "hello"
   url: "/issues/:objectId/:slug"
 
 module.exports.id = "Issue"

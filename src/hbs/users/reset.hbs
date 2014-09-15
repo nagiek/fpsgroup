@@ -1,0 +1,21 @@
+<div class="container">
+  <form id="reset-password-modal-form" class="modal-dialog modal-form modal-large">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="reset-password-modal-label" class="modal-title">{{__ "user.actions.forgot_your_password" }}</h3>
+      </div>
+      <div class="modal-body">
+        <div id="reset-email-group" class="form-group">
+          <label for="email" class="control-label element-invisible">{{__ "user.form.email" }}:</label>
+          <div class="controls">
+            <input type="email" name="email" id="reset-modal-email" class="form-control input-lg" size="22" placeholder="{{__ "user.form.email" }}">
+            <p class="help-block">{{__ "user.form.instructions_to_email" }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">{{__ "user.actions.reset_password" }}</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,14 +1,13 @@
 BaseView = require("../base")
-NewIssuesView = require("./new")
-moment = require("moment")
 _ = require("underscore")
 Parse = require("parse").Parse
 
-module.exports = NewIssuesView.extend
-  className: "issues_edit_view"
-
-  # @collection will not be in initialize, as we have not hydrated the view.
-  # Therefore, delay adding events until preRender (which comes after hydrate).
+module.exports = BaseView.extend
+  className: "profiles_edit_view"
+  	
+  events:
+    'submit form' : 'save'
+    
   postRender : ->
 
     @listenTo @model, 'invalid', (error) =>
@@ -29,6 +28,15 @@ module.exports = NewIssuesView.extend
     data = BaseView.prototype.getTemplateData.call(this)
     _.extend data, cancelPath: @model.getUrl()
 
+  getSaveData: ->
+
+    # super
+    BaseView::getSaveData.apply(this, arguments)
+
+    data = @$('form').serializeJSON()
+
+    data
+
   save : (e) ->
 
     # super
@@ -43,4 +51,4 @@ module.exports = NewIssuesView.extend
       error: (model, error) => 
         model.trigger "invalid", error
 
-module.exports.id = "issues/edit"
+module.exports.id = "profiles/edit"

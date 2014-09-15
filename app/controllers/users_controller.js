@@ -1,38 +1,19 @@
 (function() {
-  var _;
-
-  _ = require("underscore");
-
   module.exports = {
-    index: function(params, callback) {
-      var spec;
-      spec = {
-        collection: {
-          collection: "Users",
-          params: params
-        }
-      };
-      this.app.fetch(spec, function(err, result) {
-        callback(err, result);
-      });
+    login: function(params, callback) {
+      callback();
     },
-    show: function(params, callback) {
-      var spec;
-      spec = {
-        model: {
-          model: "User",
-          params: params
-        },
-        repos: {
-          collection: "Repos",
-          params: {
-            user: params.login
-          }
-        }
-      };
-      this.app.fetch(spec, function(err, result) {
-        callback(err, result);
-      });
+    signup: function(params, callback) {
+      callback();
+    },
+    reset: function(params, callback) {
+      callback();
+    },
+    settings: function(params, callback) {
+      return callback();
+    },
+    history: function(params, callback) {
+      return callback();
     }
   };
 

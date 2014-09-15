@@ -1,29 +1,18 @@
-_ = require("underscore")
 module.exports =
-  index: (params, callback) ->
-    spec = collection:
-      collection: "Users"
-      params: params
-
-    @app.fetch spec, (err, result) ->
-      callback err, result
-      return
-
+  login: (params, callback) ->
+    callback()
     return
 
-  show: (params, callback) ->
-    spec =
-      model:
-        model: "User"
-        params: params
-
-      repos:
-        collection: "Repos"
-        params:
-          user: params.login
-
-    @app.fetch spec, (err, result) ->
-      callback err, result
-      return
-
+  signup: (params, callback) ->
+    callback()
     return
+
+  reset: (params, callback) ->
+    callback()
+    return
+
+  settings: (params, callback) ->  
+    callback()
+
+  history: (params, callback) ->
+    callback()

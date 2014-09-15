@@ -96,8 +96,50 @@ Parse.View::remove = ->
   @stopListening()
   @
 
+
+# User
+# --------
+
+###
+Return the current user, but only if we're on the client.
+Logging in to the server is not allowed.
+###
+oldParseUserCurrent = Parse.User.current
+Parse.User.current = ->
+  if Parse._isNode then return null
+  oldParseUserCurrent()
+
+###
+Run all activites to set up the current user.
+###
+Parse.User::setup = ->
+  new Parse.Query("_User")
+  .include('profile')
+  .equalTo("objectId", @id)
+  .first().then (user) => 
+
+    profile = user.get "profile"
+
+    unless profile
+      error = new Parse.Error "no_profile", "No matching profile was found"
+      return Parse.Promise.error error
+
+    @set "profile", profile 
+
+    # Return a promise, to maintain API
+    Parse.Promise.as @
+  , ->
+    error = new Parse.Error "no_profile", "No matching profile was found"
+    return Parse.Promise.error error
+
+
 # Object
 # --------
+
+###
+A model is new if it has never been saved to the server, and lacks an id.
+###
+Parse.Object::isNew = -> !@has @idAttribute
 
 ###
 Pulls "special" fields like objectId, createdAt, etc. out of attrs
@@ -211,11 +253,6 @@ The only supported options are <code>silent</code>,
 
 #   @change options  unless options.silent
 #   this
-
-###
-A model is new if it has never been saved to the server, and lacks an id.
-###
-Parse.Object::isNew = -> !@has @idAttribute
 
 
 

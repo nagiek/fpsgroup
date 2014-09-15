@@ -8,5 +8,11 @@ module.exports = (match) ->
   match "issues/:objectId/:slug",       "issues#show"
   match "issues/:objectId/:slug/edit",  "issues#edit"
 
-  match "users",                        "users#index"
-  match "users/:login",                 "users#show"
+  match "users/:objectId",              "profiles#show"
+  match "users/:objectId/edit",         "profiles#edit"
+
+  match "account/settings",             "users#settings"
+  match "account/history",              "users#history"
+  match "account/login",                "users#login"
+  match "account/signup",               "users#signup"
+  match "account/reset",                "users#reset"

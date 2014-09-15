@@ -1,0 +1,34 @@
+<div class="container">
+  <form id="login-form" class="modal-dialog modal-form modal-large">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="login-label" class="modal-title inline-block">{{__ "user.actions.login" }}</h3>
+        <p class="inline-block">(<a id="switch-signup-modal" href="/account/signup">{{__ "user.actions.switch_signup" }}</a>)</p>
+      </div>
+      <div class="modal-body">
+        <fieldset>
+          <div class="alert alert-danger" style="display:none"></div>        
+          <legend class="text-center">{{__ "user.actions.sign_in_with_email" }}</legend>
+          <div class="row">
+            <div class="form-group username-group align-top col-md-6">
+              <label for="login-username" class="control-label element-invisible">{{__ "user.form.email" }}:</label>
+              <div class="controls">
+                <input type="email" name="login-username" id="login-username" class="form-control input-lg" placeholder="{{__ "user.form.email" }}">
+              </div>
+            </div>
+            <div class="form-group password-group align-top col-md-6">
+              <label for="login-password" class="control-label element-invisible">{{__ "user.form.password" }}:</label>
+              <div class="controls">
+                <input type="password" name="login-password" id="login-password" class="form-control input-lg" placeholder="{{__ "user.form.password" }}">
+              </div>
+              <p class="help-block"><small><a class="reset-password-link" href="/account/reset_password">{{__ "user.actions.forgot_your_password" }}</a></small></p>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">{{__ "user.actions.login" }}</button>
+      </div>
+    </div>
+  </form>
+</div>

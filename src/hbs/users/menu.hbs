@@ -1,0 +1,46 @@
+{{#if objectId}}
+  <li class="hidden-sm hidden-xs">
+    <a id="profile-link" class="clearfix" href="/users/{{ objectId }}">
+      <img src="{{ src }}" class="pull-left photo photo-tiny img-circle" alt="{{ photo_alt }}" width="16" height="16">
+      <span class="photo-float tiny-float">{{ name }}</span>
+    </a>
+  </li>
+  <li id="memos" class="dropdown list-item-icon">
+    <a id="mLabel" data-target="#" data-toggle="dropdown" role="menu" class="dropdown-toggle">
+      <span class="glyphicon glyphicon-flag"></span>
+      <span id="memos-count" class="badge badge-danger hide">0</span>
+    </a>
+    <div aria-labelledby="mLabel" role="menu" class="dropdown-menu notifications-menu">
+      <div class="dropdown-top"><a href="#" id="mark-read">{{__ "common.expressions.mark_read" }}</a></div>
+      <ul></ul>
+      <a href="/notifications" class="dropdown-bottom">{{__ "common.expressions.see_all" }}</a>
+    </div>
+  </li>
+  <li id="friend-requests" class="dropdown list-item-icon">
+    <a id="fLabel" data-target="#" data-toggle="dropdown" role="menu" class="dropdown-toggle">
+      <span class="glyphicon glyphicon-user"></span>
+      <span id="friend-requests-count" class="badge badge-danger hide">0</span>
+    </a>
+    <div aria-labelledby="fLabel" role="menu" class="dropdown-menu notifications-menu">
+      <ul></ul>
+      <a href="/notifications" class="dropdown-bottom">{{__ "common.expressions.see_all" }}</a>
+    </div>
+  </li>
+  <li class="dropdown hidden-sm hidden-xs list-item-icon">
+    <a id="pLabel" data-target="#" data-toggle="dropdown" role="menu" class="dropdown-toggle">
+      <span class="glyphicon glyphicon-cog"></span>
+    </a>
+    <ul aria-labelledby="pLabel" role="menu" class="dropdown-menu">
+      <li><a href="/account/settings"><span class="glyphicon glyphicon-user"></span> {{__ "user.menu.account_settings" }}</a></li>
+      <li><a href="/account/history"><span class="glyphicon glyphicon-file"></span> {{__ "common.nouns.history" }}</a></li>
+      <li class="divider">
+      <li><a id="logout" href="#">{{__ "user.actions.logout" }}</a></li>
+    </ul>
+  </li>
+{{else}}
+  <li><a id="login-link" href="#">{{__ "user.actions.login" }}</a></li>
+  <li class="hidden-xs hidden-sm"><a id="signup-link" href="#">{{__ "user.actions.signup" }}</a></li>
+{{/if}}
+<li class="visible-xs visible-sm list-item-icon">
+  <a href="#" data-target="#search-menu" data-toggle="collapse"><span class="glyphicon glyphicon-search"></span></a>
+</li>
