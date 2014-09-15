@@ -85,7 +85,15 @@
           loading: false
         });
       }), this);
-      return BaseApp.prototype.start.call(this);
+      if (Parse.User.current()) {
+        return Parse.User.current().setup().then((function(_this) {
+          return function() {
+            return BaseApp.prototype.start.call(_this);
+          };
+        })(this));
+      } else {
+        return BaseApp.prototype.start.call(this);
+      }
     },
 
     /*

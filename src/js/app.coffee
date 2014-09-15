@@ -93,8 +93,12 @@ module.exports = BaseApp.extend
       return
     ), this
 
-    # Call 'super'.
-    BaseApp::start.call this
+
+    # Setup the user, then get going.
+    if Parse.User.current()
+      Parse.User.current().setup().then => BaseApp::start.call this
+    else
+      BaseApp::start.call this
 
   ###
   Client-side only.

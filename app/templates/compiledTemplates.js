@@ -532,11 +532,7 @@ function program1(depth0,data) {
   if (stack1 = helpers.src) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.src; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" class=\"pull-left photo photo-tiny img-circle\" alt=\"";
-  if (stack1 = helpers.photo_alt) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.photo_alt; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\" width=\"16\" height=\"16\">\n      <span class=\"photo-float tiny-float\">";
+    + "\" class=\"pull-left photo photo-tiny img-circle\" width=\"16\" height=\"16\">\n      <span class=\"photo-float tiny-float\">";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)

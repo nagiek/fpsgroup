@@ -116,9 +116,11 @@ Parse.User::setup = ->
   new Parse.Query("_User")
   .include('profile')
   .equalTo("objectId", @id)
-  .first().then (user) => 
+  .first().then (user) =>
 
     profile = user.get "profile"
+
+    console.log profile
 
     unless profile
       error = new Parse.Error "no_profile", "No matching profile was found"
