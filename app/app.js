@@ -41,12 +41,14 @@
       RESTAPIKEY = "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC";
       Parse.initialize(APPID, JSKEY);
       this.locale = this.locale || 'en';
+      this.lang = this.locale;
       phrases = {
         en: require("./lang/en"),
         fr: require("./lang/fr")
       };
       this.polyglot = new Polyglot({
         locale: this.locale,
+        lang: this.lang,
         phrases: phrases[this.locale]
       });
       moment.locale(this.locale);

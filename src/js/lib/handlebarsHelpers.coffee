@@ -19,6 +19,9 @@ module.exports = (Handlebars) ->
   __: (key, options) ->
     Handlebars.polyglot.t key, options
 
+  i18n: (attr) ->
+    @[attr+Handlebars.polyglot.currentLocale.toUpperCase()]
+
   moment: (context, format) ->
     if typeof format isnt "String" then format = "LL"
     moment(context.iso).format(format)

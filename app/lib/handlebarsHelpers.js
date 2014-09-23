@@ -17,6 +17,9 @@ the actual Handlebars instance will come from.
       __: function(key, options) {
         return Handlebars.polyglot.t(key, options);
       },
+      i18n: function(attr) {
+        return this[attr + Handlebars.polyglot.currentLocale.toUpperCase()];
+      },
       moment: function(context, format) {
         if (typeof format !== "String") {
           format = "LL";

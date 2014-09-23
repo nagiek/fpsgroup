@@ -1,10 +1,33 @@
 <!-- form-xlarge -->
 <fieldset>
   <div class="form-group title-group">
-    <label for="issue-title" class="control-label control-label-lg col-sm-2">{{__ "common.fields.title" }}</label>
-    <div class="col-sm-10 col-md-8">
-      <input type="text" class="form-control input-lg" name="issue[title]" id="issue-title" maxlength="128" value="{{ title }}" placeholder="{{__ "common.fields.title" }}" required="required" />
+    <label for="issue-titleEN" class="control-label control-label-lg col-sm-2">{{__ "common.fields.title" }} ({{__ "common.langs.EN" }})</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control input-lg" name="issue[titleEN]" id="issue-titleEN" maxlength="128" value="{{ titleEN }}" placeholder="{{__ "common.fields.title" }} ({{__ "common.langs.EN" }})" required="required" />
       <p class="help-block">{{__ "issue.form.title_help" }}</p>
+    </div>
+    <label for="issue-titleFR" class="control-label control-label-lg col-sm-2">{{__ "common.fields.title" }} ({{__ "common.langs.FR" }})</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control input-lg" name="issue[titleFR]" id="issue-titleFR" maxlength="128" value="{{ titleFR }}" placeholder="{{__ "common.fields.title" }} {{__ "common.langs.FR" }}" required="required" />
+      <p class="help-block">{{__ "issue.form.title_help" }}</p>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <div class="col-sm-offset-2 col-sm-10">
+    <div class="row"><legend class="col-sm-8">{{__ "common.nouns.codes" }}</legend></div>
+  </div>
+  <div class="form-group">
+    <label for="fundservCode" class="control-label control-label-lg col-sm-2">{{__ "issue.fields.fundservCode" }}</label>
+    <div class="col-xs-6">
+      <input type="text" class="form-control" name="issue[fundservCode]" maxlength="8" value="{{ fundservCode }}" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="ismCode" class="control-label control-label-lg col-sm-2">{{__ "issue.fields.ismCode" }}</label>
+    <div class="col-xs-6">
+      <input type="text" class="form-control" name="issue[ismCode]" maxlength="8" value="{{ ismCode }}" />
     </div>
   </div>
 </fieldset>

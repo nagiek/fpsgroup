@@ -1,8 +1,8 @@
 {{#if objectId}}
-  <li class="hidden-sm hidden-xs">
+  <li>
     <a id="profile-link" class="clearfix" href="/users/{{ objectId }}">
-      <img src="{{ src }}" class="pull-left photo photo-tiny img-circle" width="16" height="16">
-      <span class="photo-float tiny-float">{{ name }}</span>
+      <img src="{{ src }}" class="pull-left photo photo-tiny img-circle" width="32" height="32">
+      <span class="photo-float tiny-float hidden-sm hidden-xs">{{ name }}</span>
     </a>
   </li>
   <li id="memos" class="dropdown list-item-icon">
@@ -26,7 +26,7 @@
       <a href="/notifications" class="dropdown-bottom">{{__ "common.expressions.see_all" }}</a>
     </div>
   </li>
-  <li class="dropdown hidden-sm hidden-xs list-item-icon">
+  <li class="dropdown list-item-icon">
     <a id="pLabel" data-target="#" data-toggle="dropdown" role="menu" class="dropdown-toggle">
       <span class="glyphicon glyphicon-cog"></span>
     </a>
@@ -41,6 +41,6 @@
   <li><a id="login-link" href="#">{{__ "user.actions.login" }}</a></li>
   <li class="hidden-xs hidden-sm"><a id="signup-link" href="#">{{__ "user.actions.signup" }}</a></li>
 {{/if}}
-<li class="visible-xs visible-sm list-item-icon">
+<li class="visible-xs list-item-icon">
   <a href="#" data-target="#search-menu" data-toggle="collapse"><span class="glyphicon glyphicon-search"></span></a>
 </li>

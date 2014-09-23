@@ -37,8 +37,8 @@ module.exports = BaseApp.extend
     Parse.initialize APPID, JSKEY
     
     # Set the locale
-    # Give the templateAdapter access to the locale.
     @locale = @locale or 'en'
+    @lang = @locale
 
     phrases =
       en: require "./lang/en" # #{@locale}
@@ -46,12 +46,13 @@ module.exports = BaseApp.extend
 
     @polyglot = new Polyglot 
       locale: @locale
+      lang: @lang
       phrases: phrases[@locale]
 
     # Configure moment.js
     moment.locale @locale
 
-    # Save a reference to our locale
+    # Give the templateAdapter access to the locale.
     @templateAdapter.Handlebars.polyglot = @polyglot
 
     ###

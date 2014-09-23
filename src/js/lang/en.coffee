@@ -6,46 +6,54 @@ module.exports =
             
   ## Common ##            
   # Classes           
-  "common.classes.issues":                      "Issues"
-            
-  "common.actions.save":                        "Save"
-  "common.actions.edit":                        "Edit"
-  "common.actions.cancel":                      "Cancel"
-  "common.actions.changes_saved":               "Changes saved"
+  "common.classes.issues":                        "Issues"
 
-  "common.nouns.dates":                         "Dates"
-  "common.nouns.history":                       "History"
-
-  "common.expressions.mark_read":               "Mark read"
-  "common.expressions.see_all":                 "See all"
-
-  "common.conjuctions.and":                     "and"
-  "common.conjuctions.or":                      "or"
-
-  "common.dates.formats.medium":                "MMM D, YYYY"
-  "common.dates.formats.input":                 "yyyy-mm-dd"
-  "common.dates.formats.output":                "YYYY-MM-DD"
-
-  "common.fields.title":                        "Title"
-  "common.fields.body":                         "Body"
-  "common.fields.email":                        "Email"
-  "common.fields.phone":                        "Phone"
-  "common.fields.website":                      "Website"
-  "common.fields.status":                       "Status"
-  "common.fields.name":                         "Name"
-  "common.fields.posted":                       "Posted"
-  "common.fields.posted_at":                    "Posted at"
-         
-
-  ## Issues ##            
-  "issue.meta.className":                       "Issue"
-  "issue.meta.className_plural":                "Issues"
-  "issues.actions.new_issue":		                "New Issue"
-  "issue.fields.issuanceDate":                  "Issuance Date"
-  "issue.fields.maturityDate":                  "Maturity Date"
-  "issue.form.title_help":                      "Put in a good title"
-  "issue.menu.add_new_issue":                  "Add new issue"
-  "issue.menu.edit_issue":                     "Edit issue"
+  "common.actions.save":                          "Save"
+  "common.actions.edit":                          "Edit"
+  "common.actions.cancel":                        "Cancel"
+  "common.actions.changes_saved":                 "Changes saved"
+  
+  "common.nouns.dates":                           "Dates"
+  "common.nouns.history":                         "History"
+  "common.nouns.codes":                           "Codes"
+  
+  "common.langs.EN":                              "EN"
+  "common.langs.FR":                              "FR"
+  "common.langs.english":                         "English"
+  "common.langs.french":                          "French"
+  
+  "common.expressions.mark_read":                 "Mark read"
+  "common.expressions.see_all":                   "See all"
+  
+  "common.conjuctions.and":                       "and"
+  "common.conjuctions.or":                        "or"
+  
+  "common.dates.formats.medium":                  "MMM D, YYYY"
+  "common.dates.formats.input":                   "yyyy-mm-dd"
+  "common.dates.formats.output":                  "YYYY-MM-DD"
+  
+  "common.fields.title":                          "Title"
+  "common.fields.body":                           "Body"
+  "common.fields.email":                          "Email"
+  "common.fields.phone":                          "Phone"
+  "common.fields.website":                        "Website"
+  "common.fields.status":                         "Status"
+  "common.fields.name":                           "Name"
+  "common.fields.posted":                         "Posted"
+  "common.fields.posted_at":                      "Posted at"
+          
+  
+  ## Issues ##              
+  "issue.meta.className":                         "Issue"
+  "issue.meta.className_plural":                  "Issues"
+  "issues.actions.new_issue":		                  "New Issue"
+  "issue.fields.issuanceDate":                    "Issuance Date"
+  "issue.fields.maturityDate":                    "Maturity Date"
+  "issue.fields.fundservCode":                    "FundSERV Code"
+  "issue.fields.ismCode":                         "ISM Code"
+  "issue.form.title_help":                        "Put in a good title"
+  "issue.menu.add_new_issue":                     "Add new issue"
+  "issue.menu.edit_issue":                        "Edit issue"
 
 
   ## Users ##            

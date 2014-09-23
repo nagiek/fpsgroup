@@ -22,7 +22,7 @@
     "grunt": "~0.4.1",
     "grunt-browserify": "~1.2.9",
     "grunt-watchify": "~0.1.0",
-    "grunt-markdown": "https://github.com/nagiek/grunt-markdown/tarball/165e26abb27931b682e683c4f4bc18891c33e682",
+    "grunt-markdown": "https://github.com/nagiek/grunt-markdown/tarball/563405e3f67fa50728d5b423b014ae2fee1557e3",
     "grunt-contrib-coffee": "~0.10.1",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-less": "~0.11.0",

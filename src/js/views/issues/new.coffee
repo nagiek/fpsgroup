@@ -53,7 +53,7 @@ module.exports = class IssuesNewView extends BaseView
 
   getTemplateData: ->
     # Get `super`.
-    data = BaseView.prototype.getTemplateData.call(this)
+    data = BaseView::getTemplateData.call(this)
     _.extend data, cancelPath: @collection.url
 
   getSaveData: ->
@@ -62,7 +62,8 @@ module.exports = class IssuesNewView extends BaseView
     BaseView::getSaveData.apply(this, arguments)
 
     data = @$('form').serializeJSON()    
-    data.issue.slug = _.slugify data.issue.title
+    data.issue.slugEN = _.slugify data.issue.titleEN
+    data.issue.slugFR = _.slugify data.issue.titleFR
 
     format = @app.polyglot.t("common.dates.formats.output")
     data.issue.issuanceDate = moment(data.issue.issuanceDate, format).toDate()

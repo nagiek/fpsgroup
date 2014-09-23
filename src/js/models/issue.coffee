@@ -1,9 +1,7 @@
 Base = require("./base")
 
 module.exports = Base.extend "Issue",
-  idAttribute: "objectId"
-  
   className: "Issue"
-  url: "/issues/:objectId/:slug"
+  url: -> "/issues/:objectId/:slug#{@app.lang.toUpperCase()}"
 
 module.exports.id = "Issue"

@@ -120,8 +120,6 @@ Parse.User::setup = ->
 
     profile = user.get "profile"
 
-    console.log profile
-
     unless profile
       error = new Parse.Error "no_profile", "No matching profile was found"
       return Parse.Promise.error error

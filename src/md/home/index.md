@@ -1,8 +1,9 @@
-Welcome to GitHub Browser!
-==========================
+{{copyright "2013"}}
 
-This is a little app that demonstrates how to use Rendr by consuming GitHub's public Api.
+*hi* hi
 
-Check out [Repos](/repos) or [Users](/users).
+> hi
+> hey
+
 
 {{copyright "2013"}}

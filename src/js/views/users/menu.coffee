@@ -6,7 +6,8 @@ module.exports = BaseView.extend
   tagName: "ul"
   attributes:
     id: "user-menu"
-    class: "nav navbar-nav navbar-right pull-right"
+    # Need both "right" classes for dropdowns and floats.
+    class: "nav navbar-nav pull-right navbar-right"
 
   events:
     "click #signup-link"  : "showSignupModal"
@@ -28,7 +29,6 @@ module.exports = BaseView.extend
   # Don't assign Parse.User.current().get("profile") to @model
   # It makes the user profile sticky after log out.
   getTemplateData: ->
-    if Parse.User.current() then console.log Parse.User.current().get("profile")
     return Parse.User.current().get("profile").toJSON() if Parse.User.current()
     return _.clone @options
 

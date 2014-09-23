@@ -1,5 +1,4 @@
 path = require "path"
-marked = require "marked"
 
 stylesheetsDir = "src/css/stylesheets"
 cloudDir = "cloud"
@@ -69,12 +68,11 @@ module.exports = (grunt) ->
     markdown:
       compile:
         options:
-          template: false
-          markdownOptions:
-            # ensure we handle quotes properly, otherwise the
-            # handlesbars file will not have correct arguments. 
-            renderer: new marked.Renderer()
-            gfm: true
+          htmlExtension: 'hbs'
+          # markdownOptions:
+          #   # ensure we handle quotes properly, otherwise the
+          #   # handlesbars file will not have correct arguments. 
+          #   renderer: new marked.Renderer()
         files: [
           {
             expand: true,
@@ -200,7 +198,7 @@ module.exports = (grunt) ->
   
   # Run the server and watch for file changes
   grunt.registerTask "server", [
-    # "compile"
+    "compile"
     "runNode"
     "watch"
     # "watchify"

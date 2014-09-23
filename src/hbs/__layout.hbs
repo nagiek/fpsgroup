@@ -9,9 +9,9 @@
   </head>
 
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header pull-left">
           <a class="navbar-brand" href="/">GitHub Browser</a>
         </div>
         <ul id="primary-nav" class="nav navbar-nav left-sm hidden-xs">
@@ -19,13 +19,14 @@
           <li><a href="/issues">Issues</a></li>
         </ul>
         {{view "users/menu"}}
-        <div id="search-menu" class="navbar-collapse collapse navbar-left clearfix">        
-          <form class="navbar-form form-search">
-            <button type="button" class="btn btn-link hidden-sm">
+        <div class="clearfix-xs"></div>
+        <div id="search-menu" class="navbar-collapse collapse navbar-left">
+          <form class="navbar-form">
+            <button type="button" class="btn btn-link hidden-xs">
               <span class="glyphicon glyphicon-search"></span>
             </button>
             <label class="sr-only">Search</label>
-            <input class="form-control search-query" type="text" name="q" placeholder="Search" autocomplete="off" spellcheck="off">
+            <input class="form-control" type="text" name="q" placeholder="Search" autocomplete="off" spellcheck="off">
           </form>
         </div>
         <div class="loading-indicator">Loading&hellip;</div>

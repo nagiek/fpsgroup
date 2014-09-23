@@ -23,9 +23,6 @@ module.exports =
         model: "Issue"
         params: params
 
-      collection:
-        collection: "Issues"
-
     @app.fetch spec, (err, result) ->
       callback err, result
 
