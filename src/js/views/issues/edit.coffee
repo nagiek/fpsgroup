@@ -24,6 +24,9 @@ module.exports = NewIssuesView.extend
 
       Parse.history.navigate model.getUrl(), true
 
+    # unless Modernizr.inputtypes.date
+    @$('.datepicker').datepicker()
+
   getTemplateData: ->
     # Get `super`.
     data = BaseView.prototype.getTemplateData.call(this)
