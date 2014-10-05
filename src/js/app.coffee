@@ -12,6 +12,10 @@ _.str = require('underscore.string')
 # Mix in non-conflict functions to Underscore namespace if you want
 _.mixin _.str.exports()
 
+APPID =      "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v"
+JSKEY =      "bY8kXjylVf3x2nev6Kq2UjMt91fNZFiMsGF5b1h5"
+RESTAPIKEY = "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC"
+
 ###
 Extend the `BaseApp` class, adding any custom methods or overrides.
 ###
@@ -28,10 +32,6 @@ module.exports = BaseApp.extend
   app on both client and server.
   ###
   initialize: ->
-
-    APPID =      "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v"
-    JSKEY =      "bY8kXjylVf3x2nev6Kq2UjMt91fNZFiMsGF5b1h5"
-    RESTAPIKEY = "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC"
     
     # Javascript Key
     Parse.initialize APPID, JSKEY
@@ -79,10 +79,10 @@ module.exports = BaseApp.extend
   start: ->
 
     # Always include these headers, unless otherwise noted.
-    # if window isnt undefined and window.$ isnt undefined
-    #   window.$.ajaxSetup beforeSend: (jqXHR, settings) ->
-    #     jqXHR.setRequestHeader "X-Parse-Application-Id", window.APPID
-    #     jqXHR.setRequestHeader "X-Parse-REST-API-Key", window.RESTAPIKEY
+    window.$ = require "jquery" if window.$ is undefined
+    window.$.ajaxSetup beforeSend: (jqXHR, settings) ->
+      jqXHR.setRequestHeader "X-Parse-Application-Id", APPID
+      jqXHR.setRequestHeader "X-Parse-REST-API-Key", RESTAPIKEY
     
     # Show a loading indicator when the app is fetching.
     @router.on "action:start", (->

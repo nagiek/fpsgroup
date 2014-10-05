@@ -18,6 +18,7 @@ module.exports = (grunt) ->
       compile:
         files: [          
           {expand: true, flatten: true, cwd: handlebarsDir + "/", src: '*', dest: 'app/templates/', filter:  (filepath) -> path.basename(filepath).slice(0, 2) is "__"}, # i.e. __layout.hbs.`
+          {expand: true, flatten: true, cwd: "bower_components/typeahead.js/dist/", src: "typeahead.bundle.min.js", dest: "app/lib"},
           {expand: true, flatten: true, cwd: "bower_components/bootstrap/dist/js/", src: "bootstrap.min.js", dest: "app/lib"},
           {expand: true, flatten: true, cwd: "bower_components/jquery.serializeJSON/", src: "jquery.serializeJSON.min.js", dest: "app/lib"},
           {expand: true, flatten: true, cwd: "bower_components/bootstrap-datepicker/js/", src: "bootstrap-datepicker.js", dest: "app/lib"},
@@ -187,13 +188,17 @@ module.exports = (grunt) ->
 
     return
 
-  grunt.registerTask "compile", [
+  grunt.registerTask "initial", [
     "copy"
-    "coffee"
     "markdown"
-    "handlebars"
-    "browserify"
     "less"
+  ]
+
+
+  grunt.registerTask "compile", [
+    "coffee"
+    "handlebars"
+    "browserify:compile"
   ]
   
   # Run the server and watch for file changes

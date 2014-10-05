@@ -1,4 +1,35 @@
 (function() {
+  var _;
+
+  _ = require("underscore");
+
+  Parse.Cloud.beforeSave("Issue", function(req, res) {
+    var issue, stopWords, titleEN, titleFR, words;
+    issue = req.object;
+    titleEN = issue.get("titleEN") || "";
+    titleFR = issue.get("titleFR") || "";
+    if (!titleEN) {
+      return res.error("missing.titleEN");
+    }
+    if (!titleFR) {
+      return res.error("missing.titleFR");
+    }
+    words = [].concat(titleEN.split(/\s+/), titleFR.split(/\s+/));
+    words = _.map(words, function(w) {
+      return w.toLowerCase();
+    });
+    words.push(issue.get("ismCode").toLowerCase());
+    words.push(issue.get("fundservCode").toLowerCase());
+    issue.set("ismCode", issue.get("ismCode").toUpperCase());
+    issue.set("fundservCode", issue.get("fundservCode").toUpperCase());
+    stopWords = ["the", "in", "and", "le", "la", "les"];
+    words = _.filter(words, function(w) {
+      return w.match(/^\w+$/) && !_.contains(stopWords, w);
+    });
+    issue.set("search", words);
+    return res.success();
+  });
+
   Parse.Cloud.define("SetPicture", function(req, res) {
     return Parse.Cloud.httpRequest({
       method: "GET",

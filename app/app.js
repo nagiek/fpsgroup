@@ -1,5 +1,5 @@
 (function() {
-  var BaseApp, Parse, Polyglot, handlebarsHelpers, moment, _;
+  var APPID, BaseApp, JSKEY, Parse, Polyglot, RESTAPIKEY, handlebarsHelpers, moment, _;
 
   BaseApp = require("rendr/shared/app");
 
@@ -16,6 +16,12 @@
   _.str = require('underscore.string');
 
   _.mixin(_.str.exports());
+
+  APPID = "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v";
+
+  JSKEY = "bY8kXjylVf3x2nev6Kq2UjMt91fNZFiMsGF5b1h5";
+
+  RESTAPIKEY = "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC";
 
 
   /*
@@ -35,10 +41,7 @@
     app on both client and server.
      */
     initialize: function() {
-      var APPID, JSKEY, RESTAPIKEY, phrases;
-      APPID = "XPgFZcncZDVj0jjwpUJkUhPpCisuk7gytJDJGI5v";
-      JSKEY = "bY8kXjylVf3x2nev6Kq2UjMt91fNZFiMsGF5b1h5";
-      RESTAPIKEY = "ulEQgeXTKidIPtjTIdwnRKrecmRTnxoxSKHgnqOC";
+      var phrases;
       Parse.initialize(APPID, JSKEY);
       this.locale = this.locale || 'en';
       this.lang = this.locale;
@@ -77,6 +80,15 @@
     in order to do things like bind events to the router, as shown below.
      */
     start: function() {
+      if (window.$ === void 0) {
+        window.$ = require("jquery");
+      }
+      window.$.ajaxSetup({
+        beforeSend: function(jqXHR, settings) {
+          jqXHR.setRequestHeader("X-Parse-Application-Id", APPID);
+          return jqXHR.setRequestHeader("X-Parse-REST-API-Key", RESTAPIKEY);
+        }
+      });
       this.router.on("action:start", (function() {
         this.set({
           loading: true

@@ -1,44 +1,24 @@
-.typeahead {
-  margin-top:0; // Override a default Twitter Bootstrap setting
-  background-color: @input-bg;
-}
-
-.twitter-typeahead {
-  .form-control:first-child {
-    border-radius: @border-radius-base;
+span.twitter-typeahead {
+  width: 100%;
+  .tt-hint {
+    color: @gray-light;
   }
-}
-
-.tt-dropdown-menu {
-  margin-top: 12px;
-  padding: 8px 0;
-  background-color: @dropdown-bg;
-  border: 1px solid @dropdown-fallback-border; // IE8 fallback
-  border: 1px solid @dropdown-border;
-  border-radius: @border-radius-base;
-  .box-shadow(0 5px 10px rgba(0,0,0,.2));
-  // .dropdown-header {
-  //   margin:0;
-  //   text-transform:uppercase;
-  // }
-}
-
-.tt-suggestion {
-  > a {
-    padding: 3px 20px;
-    display:block;
-    &:hover {
-      text-decoration:none;
+  .tt-dropdown-menu {
+    &:extend(.dropdown-menu);
+  }
+  .tt-suggestion {
+    &.tt-cursor {
+      &:extend(.dropdown-menu > .active > a);
     }
-  }
-  .empty {
-    padding: 3px 20px;
-    display:block;
-  }
-  &.tt-is-under-cursor {
-    a {
-      color: @dropdown-link-active-color;
-      #gradient > .vertical(@start-color: @dropdown-link-active-bg; @end-color: darken(@dropdown-link-active-bg, 5%));
+    > a {
+      &:extend(.dropdown-menu > li > a);
+      &:hover,
+      &:focus {
+        &:extend(.dropdown-menu > li > a:hover);
+      }
+    }
+    > .tt-empty {
+      &:extend(.dropdown-menu > li > a);
     }
   }
 }

@@ -9,6 +9,7 @@ module.exports =
   "common.classes.issues":                        "Issues"
 
   "common.actions.save":                          "Save"
+  "common.actions.search":                        "Search"
   "common.actions.edit":                          "Edit"
   "common.actions.cancel":                        "Cancel"
   "common.actions.changes_saved":                 "Changes saved"
@@ -46,7 +47,7 @@ module.exports =
   ## Issues ##              
   "issue.meta.className":                         "Issue"
   "issue.meta.className_plural":                  "Issues"
-  "issues.actions.new_issue":		                  "New Issue"
+  "issue.actions.new_issue":		                  "New Issue"
   "issue.fields.issuanceDate":                    "Issuance Date"
   "issue.fields.maturityDate":                    "Maturity Date"
   "issue.fields.fundservCode":                    "FundSERV Code"
@@ -54,6 +55,7 @@ module.exports =
   "issue.form.title_help":                        "Put in a good title"
   "issue.menu.add_new_issue":                     "Add new issue"
   "issue.menu.edit_issue":                        "Edit issue"
+  "issue.search.empty":                           "Nothing matches your search"
 
 
   ## Users ##            

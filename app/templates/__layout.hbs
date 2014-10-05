@@ -20,15 +20,7 @@
         </ul>
         {{view "users/menu"}}
         <div class="clearfix-xs"></div>
-        <div id="search-menu" class="navbar-collapse collapse navbar-left">
-          <form class="navbar-form">
-            <button type="button" class="btn btn-link hidden-xs">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-            <label class="sr-only">Search</label>
-            <input class="form-control" type="text" name="q" placeholder="Search" autocomplete="off" spellcheck="off">
-          </form>
-        </div>
+        {{view "helpers/search"}}
         <div class="loading-indicator">Loading&hellip;</div>
       </div>
     </div>

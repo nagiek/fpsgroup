@@ -78,6 +78,22 @@ function program9(depth0,data) {
   return buffer;
   });
 
+templates["helpers/search"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div id=\"search-menu\" class=\"navbar-collapse collapse navbar-left\">\n  <form class=\"navbar-form\">\n    <button type=\"button\" class=\"btn btn-link hidden-xs\">\n      <span class=\"glyphicon glyphicon-search\"></span>\n    </button>\n    <label class=\"sr-only\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.search", options) : helperMissing.call(depth0, "__", "common.actions.search", options)))
+    + "</label>\n    <input class=\"form-control\" type=\"text\" name=\"q\" placeholder=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.search", options) : helperMissing.call(depth0, "__", "common.actions.search", options)))
+    + "\" autocomplete=\"off\" spellcheck=\"off\">\n  </form>\n</div>";
+  return buffer;
+  });
+
 templates["home/index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -239,7 +255,7 @@ function program1(depth0,data) {
   buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issue.meta.className_plural", options) : helperMissing.call(depth0, "__", "issue.meta.className_plural", options)))
     + "</h1>\n  <ul class=\"list-inline left-sm\">\n    <li>\n      <a href=\"/issues/new\" id=\"new-issue-link\" class=\"btn btn-success\">\n        <span class=\"glyphicon glyphicon-plus\"></span> ";
   options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issues.actions.new_issue", options) : helperMissing.call(depth0, "__", "issues.actions.new_issue", options)))
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issue.actions.new_issue", options) : helperMissing.call(depth0, "__", "issue.actions.new_issue", options)))
     + "\n      </a>\n    </li>\n  </ul>\n</header>\n\n<ul>\n";
   stack2 = helpers.each.call(depth0, depth0.models, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }

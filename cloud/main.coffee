@@ -1,3 +1,39 @@
+_ = require("underscore")
+
+Parse.Cloud.beforeSave "Issue", (req, res) ->
+  
+  issue = req.object
+
+  titleEN = issue.get("titleEN") or ""
+  titleFR = issue.get("titleFR") or ""
+  
+  return res.error("missing.titleEN") unless titleEN
+  return res.error("missing.titleFR") unless titleFR
+
+  # Make an array of keywords to search against from the title.
+  # All words converted to lower case.
+  words = [].concat titleEN.split(/\s+/), titleFR.split(/\s+/)
+  words = _.map words, (w) -> w.toLowerCase()
+  words.push issue.get("ismCode").toLowerCase()
+  words.push issue.get("fundservCode").toLowerCase()
+
+  # For convention, codes are all uppercase.
+  issue.set("ismCode", issue.get("ismCode").toUpperCase())
+  issue.set("fundservCode", issue.get("fundservCode").toUpperCase())
+
+  stopWords = [
+    "the"
+    "in"
+    "and"
+    "le"
+    "la"
+    "les"
+  ]
+  words = _.filter words, (w) -> w.match(/^\w+$/) and not _.contains(stopWords, w)
+  
+  issue.set "search", words
+  res.success()
+
 # Set Picture
 # -----------
 # Set a user's picture to an external URL
