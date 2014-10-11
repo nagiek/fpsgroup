@@ -9,13 +9,10 @@ module.exports = NewIssuesView.extend
 
   # @collection will not be in initialize, as we have not hydrated the view.
   # Therefore, delay adding events until preRender (which comes after hydrate).
-  postRender : ->
 
-    @listenTo @model, 'invalid', (error) =>
-      console.log error
-      @$('button.save').button "reset"
-      msg = @app.polyglot.t("common.errors.unknown")
-      @app.alert event: 'model-save', fade: true, message: msg, type: 'error'
+  postRender : ->
+    
+    @listenTo @model, 'invalid', @handleBadSave
 
     @on "save:success", (model) =>
 

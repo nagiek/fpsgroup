@@ -12,20 +12,11 @@ module.exports = class IssuesNewView extends BaseView
   events:
     'submit form' : 'save'
 
-  errorHandler : ->
-    
-  initialize : (attrs) ->
-
-  
   # @collection will not be in initialize, as we have not hydrated the view.
   # Therefore, delay adding events until preRender (which comes after hydrate).
   postRender : ->
 
-    @listenTo @collection, 'invalid', (error) =>
-      console.log error
-      @$('button.save').button "reset"
-      msg = @app.polyglot.t("common.errors.unknown")
-      @app.alert event: 'model-error', fade: true, message: msg, type: 'error'
+    @listenTo @collection, 'invalid', @handleBadSave
 
     @on "save:success", (model) =>
 
@@ -84,4 +75,10 @@ module.exports = class IssuesNewView extends BaseView
       error: (model, error) =>  
         @collection.trigger "invalid", error
 
+  handleBadSave : (error) =>
+    console.log error
+    @$('button.save').button "reset"
+    msg = @app.polyglot.t("common.errors.unknown")
+    @app.alert event: 'model-error', fade: true, message: msg, type: 'error'
+  
 module.exports.id = "issues/new"
