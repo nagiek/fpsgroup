@@ -27,7 +27,9 @@ module.exports = NewIssuesView.extend
   getTemplateData: ->
     # Get `super`.
     data = BaseView.prototype.getTemplateData.call(this)
-    _.extend data, cancelPath: @model.getUrl()
+    _.extend data, 
+      cancelPath: @model.getUrl()
+      pricesPath: @model.getUrl() + "/prices"
 
   save : (e) ->
 

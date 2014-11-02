@@ -1,5 +1,12 @@
 _ = require("underscore")
 
+Parse.Cloud.beforeSave "Price", (req, res) ->
+
+  return req.error "missing.price" unless req.object.get "price"
+  return req.error "missing.date" unless req.object.get "date"
+
+  res.success()
+
 Parse.Cloud.beforeSave "Issue", (req, res) ->
   
   issue = req.object

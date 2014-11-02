@@ -14,7 +14,7 @@ module.exports = BaseView.extend
   postRender : ->
 
     # Bloodhound = require("../../lib/bloodhound")
-    require("../../lib/typeahead.bundle.min")
+    require("../../lib/typeahead.bundle.min.js")
 
     issueFilter = (parsedResponse) ->
       return [] if parsedResponse.results.length is 0

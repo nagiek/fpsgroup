@@ -4,8 +4,7 @@ Translation strings for the entire site.
 
 module.exports = 
             
-  ## Common ##            
-  # Classes           
+  ## Common ##     
   "common.classes.issues":                        "Issues"
 
   "common.actions.save":                          "Save"
@@ -14,9 +13,12 @@ module.exports =
   "common.actions.cancel":                        "Cancel"
   "common.actions.changes_saved":                 "Changes saved"
   
+  "common.nouns.date":                            "Date"
   "common.nouns.dates":                           "Dates"
   "common.nouns.history":                         "History"
   "common.nouns.codes":                           "Codes"
+  "common.nouns.price":                           "Price"
+  "common.nouns.prices":                          "Prices"
   
   "common.langs.EN":                              "EN"
   "common.langs.FR":                              "FR"
@@ -44,7 +46,8 @@ module.exports =
   "common.fields.posted_at":                      "Posted at"
           
   
-  ## Issues ##              
+
+  ## Issue ##              
   "issue.meta.className":                         "Issue"
   "issue.meta.className_plural":                  "Issues"
   "issue.actions.new_issue":		                  "New Issue"
@@ -58,7 +61,16 @@ module.exports =
   "issue.search.empty":                           "Nothing matches your search"
 
 
-  ## Users ##            
+
+  ## Price ##
+  "price.actions.save_all":                       "Save all"
+  "price.actions.save_new":                       "Save new"
+  "price.actions.edit_mode":                      "Bulk edit"
+  "price.actions.delete_mode":                    "Allow delete"
+
+
+
+  ## User ##            
   "user.actions.signin":                          "Sign in"
   "user.actions.signup":                          "Sign up"
   "user.actions.logout":                          "Log out"

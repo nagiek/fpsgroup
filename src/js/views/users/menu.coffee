@@ -1,5 +1,6 @@
 BaseView = require("../base")
 Parse = require("parse").Parse
+_ = require("underscore")
 
 module.exports = BaseView.extend
 

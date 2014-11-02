@@ -21,12 +21,18 @@ the actual Handlebars instance will come from.
         return this[attr + Handlebars.polyglot.currentLocale.toUpperCase()];
       },
       moment: function(context, format) {
+        if (context == null) {
+          return '';
+        }
         if (typeof format !== "String") {
           format = "LL";
         }
         return moment(context.iso).format(format);
       },
       duration: function(context, format) {
+        if (context == null) {
+          return '';
+        }
         if (typeof format !== "String") {
           format = "LL";
         }
@@ -34,12 +40,11 @@ the actual Handlebars instance will come from.
       },
       datepicker: function(context) {
         var format;
-        if (context != null) {
-          format = Handlebars.polyglot.t("common.dates.formats.output");
-          return moment(context.iso).format(format);
-        } else {
-          return "";
+        if (context == null) {
+          return '';
         }
+        format = Handlebars.polyglot.t("common.dates.formats.output");
+        return moment(context.iso).format(format);
       },
       log: function(variable) {
         return console.log(variable);

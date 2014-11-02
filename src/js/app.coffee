@@ -35,6 +35,9 @@ module.exports = BaseApp.extend
     
     # Javascript Key
     Parse.initialize APPID, JSKEY
+
+    # Save a reference to Parse.
+    Parse.app = @
     
     # Set the locale
     @locale = @locale or 'en'

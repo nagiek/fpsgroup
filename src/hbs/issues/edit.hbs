@@ -1,5 +1,18 @@
 <div class="container">
   <h2 class="col-sm-offset-2">{{__ "issue.menu.edit_issue" }}</h2>
+   <ul class="nav nav-tabs" role="tablist">
+    <li class="active">
+      <a href="#">
+        <span class="glyphicon glyphicon-edit"></span> {{__ "common.actions.edit" }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ pricesPath }}" id="prices-issue-link">
+        <span class="glyphicon glyphicon-stats"> {{__ "common.nouns.prices" }}
+      </a>
+    </li>
+  </ul>
+
   <form class="listing-form form-horizontal" enctype="multipart/form-data">
 
     {{partial "issues/form"}}

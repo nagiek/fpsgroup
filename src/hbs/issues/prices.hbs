@@ -1,0 +1,40 @@
+<div class="container">
+  <h2 class="col-sm-offset-2">{{__ "issue.menu.edit_issue" }}</h2>
+   <ul class="nav nav-tabs" role="tablist">
+    <li>
+      <a href="{{ editPath }}" id="prices-issue-link">
+        <span class="glyphicon glyphicon-edit"></span> {{__ "common.actions.edit" }}
+      </a>
+    </li>
+    <li class="active">
+      <a href="#"><span class="glyphicon glyphicon-stats"> {{__ "common.nouns.prices" }}</a>
+    </li>
+  </ul>
+
+  <form>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{__ "common.nouns.date" }}</th>
+          <th>{{__ "common.nouns.price" }}</th>
+          <th>{{!-- operations --}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each prices}}
+          {{partial "prices/show"}}
+        {{/each}}
+      </tbody>
+    </table>
+    
+    <div class="form-actions col-sm-offset-2">
+      <button type="submit" class="btn btn-primary">{{__ "price.actions.save_all" }}</button>
+      <a href="{{ cancelPath }}" class="cancel btn btn-default">{{__ "common.actions.cancel" }}</a>
+      <div class="pull-right">
+        <button id="edit-mode" type="button" data-toggle="button" class="btn btn-info">{{__ "price.actions.edit_mode" }}</button>
+        <button id="delete-mode" type="button" data-toggle="button" class="btn btn-info">{{__ "price.actions.delete_mode" }}</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,36 @@
+<tr id="price-{{objectId}}" class="price-existing" data-id="{{objectId}}">
+  <td>
+    <div class="value date-value">{{moment date}}</div>
+    <div class="input-group hide">
+      <label class="sr-only">{{__ "common.nouns.date" }}</label>
+      <input type="text" class="form-control date-input datepicker" maxlength="10" required="required" data-date-format="{{__ "common.dates.formats.input" }}" value="{{datepicker date}}" data-date="{{datepicker date}}" />
+    </div>
+  </td>
+  <td>
+    <div class="value price-value">{{ price }}</div>
+    <div class="input-group hide">
+      <label class="sr-only">{{__ "common.nouns.price" }}</label>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="number" class="form-control price-input" step=".01" min="0" placeholder="100.00" maxlength="6" required="required" value="{{ price }}">
+      </div>
+    </div>
+  </td>
+  <td>
+    <button type="button" class="btn btn-sm btn-default edit">
+      <span class="glyphicon glyphicon-edit" title="{{__ "common.actions.edit" }}"></span>
+    </button>
+    <button type="button" class="btn btn-sm btn-default save-changes hide">
+      {{__ "common.actions.save" }}
+    </button>
+    <button type="button" class="btn btn-sm btn-default discard-changes hide">
+      {{__ "common.actions.cancel" }}
+    </button>
+    <button type="button" class="btn btn-sm btn-success add">
+      <span class="glyphicon glyphicon-plus" title="{{__ "common.actions.add" }}"></span>
+    </button>
+    <button type="button" class="btn btn-sm btn-danger remove hide">
+      <span class="glyphicon glyphicon-remove" title="{{__ "common.actions.remove" }}"></span>
+    </button>
+  </td>
+</tr>

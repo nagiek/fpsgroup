@@ -5,7 +5,7 @@ Parse = require("parse").Parse
 # Modernizr = require("../../../bower_components/modernizr/modernizr")
 Issue = require("../../models/issue")
 
-module.exports = class IssuesNewView extends BaseView
+module.exports = BaseView.extend
 
   className: "issues_new_view"
 

@@ -2,8 +2,13 @@
   <h1>{{i18n "title"}}</h1>
   <ul class="list-inline left-sm">
     <li>
-      <a href="/issues/{{objectId}}/{{i18n "slug"}}/edit" id="edit-issue-link" class="btn btn-default">
+      <a href="{{ editPath }}" id="edit-issue-link" class="btn btn-default">
         <span class="glyphicon glyphicon-edit"></span> {{__ "common.actions.edit" }}
+      </a>
+    </li>
+    <li>
+      <a href="{{ pricesPath }}" id="prices-issue-link" class="btn btn-default">
+        <span class="glyphicon glyphicon-stats"> {{__ "common.nouns.prices" }}
       </a>
     </li>
   </ul>

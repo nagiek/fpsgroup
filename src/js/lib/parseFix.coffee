@@ -133,6 +133,82 @@ Parse.User::setup = ->
     return Parse.Promise.error error
 
 
+
+# Query
+# --------
+
+
+# Modify to take an options object
+_oldQuery = Parse.Query
+
+Parse.Query = (objectClass, options) ->
+  objectClass = Parse.Object._getSubclass(objectClass)  if _.isString(objectClass)
+  @objectClass = objectClass
+  @className = objectClass::className
+  @_where = {}
+  @_include = []
+  @_limit = -1 # negative limit means, do not send a limit
+  @_skip = 0
+  @_extraOptions = {}
+
+  # Options are not copied into the query, but extraOptions are.
+  @options = options || {}
+  @options.app = Parse.app
+  return
+
+# Copy over items. We cannot change the constructor, so do it this way.
+_.extend Parse.Query, _oldQuery
+_.extend Parse.Query::, _oldQuery::
+
+###
+Differences:
+copy the options into the object being found.
+###
+Parse.Query::find = (options) ->
+  self = this
+  options = options or {}
+  request = Parse._request(
+    route: "classes"
+    className: @className
+    method: "GET"
+    useMasterKey: options.useMasterKey
+    data: @toJSON()
+  )
+  request.then((response) ->
+    _.map response.results, (json) ->
+      obj = undefined
+      if response.className
+        obj = new Parse.Object(response.className, self.options)
+      else
+        obj = new self.objectClass(null, self.options)
+      obj._finishFetch json, true
+      obj
+  )._thenRunCallbacks options
+
+###
+Modify so that we copy the options into the object being found.
+###
+Parse.Query::first = (options) ->
+  self = this
+  options = options or {}
+  params = @toJSON()
+  params.limit = 1
+  request = Parse._request(
+    route: "classes"
+    className: @className
+    method: "GET"
+    useMasterKey: options.useMasterKey
+    data: params
+  )
+  request.then((response) ->
+    _.map(response.results, (json) ->
+      obj = new self.objectClass(null, self.options)
+      obj._finishFetch json, true
+      obj
+    )[0]
+  )._thenRunCallbacks options
+
+
 # Object
 # --------
 
@@ -141,261 +217,13 @@ A model is new if it has never been saved to the server, and lacks an id.
 ###
 Parse.Object::isNew = -> !@has @idAttribute
 
-###
-Pulls "special" fields like objectId, createdAt, etc. out of attrs
-and puts them on "this" directly.  Removes them from attrs.
-@param attrs - A dictionary with the data for this Parse.Object.
-###
-# Parse.Object::_mergeMagicFields = (attrs) ->
-  
-#   # Check for changes of magic fields.
-#   model = this
-#   specialFields = [
-#     "createdAt"
-#     "updatedAt"
-#   ]
-#   Parse._arrayEach specialFields, (attr) ->
-#     if attrs[attr] and not _.isDate(attrs[attr])
-#       model[attr] = Parse._parseDate(attrs[attr])
-#       # While they may be useful, Parse.com fails if you send these fields via a PUT request.
-#       delete attrs[attr]
-
-###
-Sets a hash of model attributes on the object, firing
-<code>"change"</code> unless you choose to silence it.
-
-<p>You can call it with an object containing keys and values, or with one
-key and value.  For example:<pre>
-gameTurn.set({
-player: player1,
-diceRoll: 2
-}, {
-error: function(gameTurnAgain, error) {
-// The set failed validation.
-}
-});
-
-game.set("currentPlayer", player2, {
-error: function(gameTurnAgain, error) {
-// The set failed validation.
-}
-});
-
-game.set("finished", true);</pre></p>
-
-@param {String} key The key to set.
-@param {} value The value to give it.
-@param {Object} options A set of Backbone-like options for the set.
-The only supported options are <code>silent</code>,
-<code>error</code>, and <code>promise</code>.
-@return {Boolean} true if the set succeeded.
-@see Parse.Object#validate
-@see Parse.Error
-###
-# Parse.Object::set = (key, val, options) ->
-#   attr = undefined
-#   attrs = undefined
-#   unset = undefined
-#   changes = undefined
-#   silent = undefined
-#   changing = undefined
-#   prev = undefined
-#   current = undefined
-#   return this  unless key?
-  
-#   # Handle both `"key", value` and `{key: value}` -style arguments.
-#   if typeof key is "object"
-#     attrs = key
-#     options = val
-#   else
-#     (attrs = {})[key] = val
-#   options or (options = {})
-  
-#   # Run validation.
-#   return false  unless @_validate(attrs, options)
-
-#   @_mergeMagicFields attrs
-  
-#   options.changes = {}
-#   escaped = @_escapedAttributes
-#   prev = @_previousAttributes or {}
-
-#   # Update attributes.
-#   Parse._arrayEach _.keys(attrs), (attr) =>
-#     val = attrs[attr]
-    
-#     # If this is a relation object we need to set the parent correctly,
-#     # since the location where it was parsed does not have access to
-#     # this object.
-#     val.parent = this  if val instanceof Parse.Relation
-#     val = new Parse.Op.Set(val)  unless val instanceof Parse.Op
-    
-#     # See if this change will actually have any effect.
-#     isRealChange = true
-#     isRealChange = false  if val instanceof Parse.Op.Set and _.isEqual(@attributes[attr], val.value)
-#     if isRealChange
-#       delete escaped[attr]
-
-#       if options.silent
-#         @_silent[attr] = true
-#       else
-#         options.changes[attr] = true
-#     currentChanges = _.last(@_opSetQueue)
-#     currentChanges[attr] = val._mergeWithPrevious(currentChanges[attr])
-#     @_rebuildEstimatedDataForKey attr
-#     if isRealChange
-#       @changed[attr] = @attributes[attr]
-#       @_pending[attr] = true  unless options.silent
-#     else
-#       delete @changed[attr]
-#       delete @_pending[attr]
-#     return
-
-#   @change options  unless options.silent
-#   this
-
-
-
-###*
-  Set a hash of model attributes, and save the model to the server.
-  updatedAt will be updated when the request returns.
-  You can either call it as:<pre>
-  object.save();</pre>
-  or<pre>
-  object.save(null, options);</pre>
-  or<pre>
-  object.save(attrs, options);</pre>
-  or<pre>
-  object.save(key, value, options);</pre>
-
-  For example, <pre>
-  gameTurn.save({
-  player: "Jake Cutter",
-  diceRoll: 2
-  }, {
-  success: function(gameTurnAgain) {
-  // The save was successful.
-  },
-  error: function(gameTurnAgain, error) {
-  // The save failed.  Error is an instance of Parse.Error.
-  }
-  });</pre>
-  or with promises:<pre>
-  gameTurn.save({
-  player: "Jake Cutter",
-  diceRoll: 2
-  }).then(function(gameTurnAgain) {
-  // The save was successful.
-  }, function(error) {
-  // The save failed.  Error is an instance of Parse.Error.
-  });</pre>
-
-  @param {Object} options A Backbone-style callback object.
-  Valid options are:<ul>
-  <li>wait: Set to true to wait for the server to confirm a successful
-  save before modifying the attributes on the object.
-  <li>silent: Set to true to avoid firing the `set` event.
-  <li>success: A Backbone-style success callback.
-  <li>error: An Backbone-style error callback.
-  <li>useMasterKey: In Cloud Code and Node only, causes the Master Key to
-  be used for this request.
-  </ul>
-  @return {Parse.Promise} A promise that is fulfilled when the save
-  completes.
-  @see Parse.Error
-###
-# Parse.Object::save = (arg1, arg2, arg3) ->
-#   i = undefined
-#   attrs = undefined
-#   current = undefined
-#   options = undefined
-#   saved = undefined
-#   if _.isObject(arg1) or Parse._isNullOrUndefined(arg1)
-#     attrs = arg1
-#     options = arg2
-#   else
-#     attrs = {}
-#     attrs[arg1] = arg2
-#     options = arg3
-  
-#   # Make save({ success: function() {} }) work.
-#   if not options and attrs
-#     extra_keys = _.reject(attrs, (value, key) ->
-#       _.include [
-#         "success"
-#         "error"
-#         "wait"
-#       ], key
-#     )
-#     if extra_keys.length is 0
-#       all_functions = true
-#       all_functions = false  if _.has(attrs, "success") and not _.isFunction(attrs.success)
-#       all_functions = false  if _.has(attrs, "error") and not _.isFunction(attrs.error)
-      
-#       # This attrs object looks like it's really an options object,
-#       # and there's no other options object, so let's just use it.
-#       return @save(null, attrs)  if all_functions
-#   options = _.clone(options) or {}
-#   current = _.clone(@attributes)  if options.wait
-#   setOptions = _.clone(options) or {}
-#   setOptions.silent = true  if setOptions.wait
-#   setError = undefined
-#   setOptions.error = (model, error) ->
-#     setError = error
-#     return
-
-#   return Parse.Promise.error(setError)._thenRunCallbacks(options, this)  if attrs and not @set(attrs, setOptions)
-#   model = this
-  
-#   # If there is any unsaved child, save it first.
-#   model._refreshCache()
-  
-#   # TODO(klimt): Refactor this so that the save starts now, not later.
-#   unsavedChildren = []
-#   unsavedFiles = []
-#   Parse.Object._findUnsavedChildren model.attributes, unsavedChildren, unsavedFiles
-#   if unsavedChildren.length + unsavedFiles.length > 0
-#     return Parse.Object._deepSaveAsync(@attributes,
-#       useMasterKey: options.useMasterKey
-#     ).then(->
-#       model.save null, options
-#     , (error) ->
-#       Parse.Promise.error(error)._thenRunCallbacks options, model
-#     )
-#   @_startSave()
-#   @_saving = (@_saving or 0) + 1
-#   @_allPreviousSaves = @_allPreviousSaves or Parse.Promise.as()
-#   @_allPreviousSaves = @_allPreviousSaves._continueWith(->
-#     method = (if model.id then "PUT" else "POST")
-#     json = model._getSaveJSON()
-#     route = "classes"
-#     className = model.className
-#     if model.className is "_User" and not model.id
-      
-#       # Special-case user sign-up.
-#       route = "users"
-#       className = null
-#     request = Parse._request(
-#       route: route
-#       className: className
-#       objectId: model.id
-#       method: method
-#       useMasterKey: options.useMasterKey
-#       data: json
-#     )
-#     request = request.then((resp, status, xhr) ->
-#       serverAttrs = model.parse(resp, status, xhr)
-#       serverAttrs = _.extend(attrs or {}, serverAttrs)  if options.wait
-#       model._finishSave serverAttrs
-#       model.set current, setOptions  if options.wait
-#       model
-#     , (error) ->
-#       model._cancelSave()
-#       Parse.Promise.error error
-#     )._thenRunCallbacks(options, model)
-#     request
-#   )
-#   @_allPreviousSaves
+Parse.Object._getSubclass = (className) ->
+  throw "Parse.Object._getSubclass requires a string argument."  unless _.isString(className)
+  ObjectClass = Parse.Object._classMap[className]
+  unless ObjectClass
+    ObjectClass = require("../models/#{className.toLowerCase()}")
+    Parse.Object._classMap[className] = ObjectClass
+  ObjectClass
 
 # Collection
 # --------
@@ -412,6 +240,24 @@ addOptions =
 
 # Add missing countBy method.
 Parse.Collection::countBy = -> _.countBy.apply _, [this.models].concat(_.toArray(arguments))
+# Parse.Collection::first = -> @at(0)
+# Parse.Collection::last = -> @at(@length - 1)
+
+### 
+Make sure we pass in the collection to the model.
+###
+Parse.Collection::fetch = (options) ->
+  options = _.clone(options) or {}
+  options.parse = true  if options.parse is `undefined`
+  collection = this
+  query = @query or new Parse.Query(@model, collection: collection)
+  query.find(useMasterKey: options.useMasterKey).then((results) ->
+    if options.add
+      collection.add results, options
+    else
+      collection.reset results, options
+    collection
+  )._thenRunCallbacks options, this
 
 Parse.Collection::add = (models, options) ->
   @set models, _.extend(
@@ -422,22 +268,11 @@ Parse.Collection::add = (models, options) ->
 # removing models that are no longer present, and merging models that
 # already exist in the collection, as necessary. Similar to **Model#set**,
 # the core operation for updating the data contained by the collection.
-Parse.Collection::# Update a collection by `set`-ing a new list of models, adding new ones,
-# removing models that are no longer present, and merging models that
-# already exist in the collection, as necessary. Similar to **Model#set**,
-# the core operation for updating the data contained by the collection.
 Parse.Collection::set = (models, options) ->
   options = _.defaults({}, options, setOptions)
   models = @parse(models, options)  if options.parse
   singular = not _.isArray(models)
   models = (if singular then ((if models then [models] else [])) else _.clone(models))
-  i = undefined
-  l = undefined
-  id = undefined
-  model = undefined
-  attrs = undefined
-  existing = undefined
-  sort = undefined
   at = options.at
   targetModel = @model
   sortable = @comparator and (not (at?)) and options.sort isnt false
@@ -533,6 +368,46 @@ Parse.Collection::set = (models, options) ->
   # Return the added (or merged) model (or models).
   (if singular then models[0] else models)
 
+
+# Prepare a model or hash of attributes to be added to this collection.
+# 
+# @differences: purposefully create the model here, as we do not have a
+# server model which we may be syncing in.
+Parse.Collection::create = (attrs, options) ->
+  options = (if options then _.clone(options) else {})
+  options.collection = this
+  options.app = @app
+
+  model = new @model(attrs, options)
+  @_prepareModel(model, options)
+  return false unless model
+  @add model, options  unless options.wait
+
+  collection = this
+  success = options.success
+  options.success = (model, resp) ->
+    collection.add model, options  if options.wait
+    success model, resp, options  if success
+    return
+
+  model.save null, options
+  model
+
+# Prepare a model or hash of attributes to be added to this collection.
+# 
+# @differences: if we have a hash, assume we are syncing from server data.
+Parse.Collection::_prepareModel = (model, options) ->
+  unless model instanceof Parse.Object
+    attrs = model
+    options.collection = this
+    options.app = @app
+    model = new @model(null, options)
+    if attrs isnt {} then model._finishFetch attrs, true
+    return false unless model._validate({}, options)
+  else model.collection = this  unless model.collection
+  model this  unless model.collection
+  model
+
 # When you have more items than you want to add or remove individually,
 # you can reset the entire set with a new list of models, without firing
 # any granular `add` or `remove` events. Fires `reset` when finished.
@@ -579,3 +454,22 @@ Parse.Collection::_removeReference = (model, options) ->
 
 #     @_byId[model.id] = model  if model.id?
 #   @trigger.apply this, arguments
+
+
+# Parse.Relation
+# --------------
+
+
+# Allow the query to take options.
+Parse.Relation::query = (options) ->
+  options = options || {}
+  unless @targetClassName
+    targetClass = Parse.Object._getSubclass(@parent.className)
+    query = new Parse.Query(targetClass, options)
+    query._extraOptions.redirectClassNameForKey = @key
+  else
+    targetClass = Parse.Object._getSubclass(@targetClassName)
+    query = new Parse.Query(targetClass, options)
+  query._addCondition "$relatedTo", "object", @parent._toPointer()
+  query._addCondition "$relatedTo", "key", @key
+  query

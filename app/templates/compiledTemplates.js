@@ -119,7 +119,17 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   buffer += "<div class=\"container\">\n  <h2 class=\"col-sm-offset-2\">";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issue.menu.edit_issue", options) : helperMissing.call(depth0, "__", "issue.menu.edit_issue", options)))
-    + "</h2>\n  <form class=\"listing-form form-horizontal\" enctype=\"multipart/form-data\">\n\n    ";
+    + "</h2>\n   <ul class=\"nav nav-tabs\" role=\"tablist\">\n    <li class=\"active\">\n      <a href=\"#\">\n        <span class=\"glyphicon glyphicon-edit\"></span> ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.edit", options) : helperMissing.call(depth0, "__", "common.actions.edit", options)))
+    + "\n      </a>\n    </li>\n    <li>\n      <a href=\"";
+  if (stack2 = helpers.pricesPath) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.pricesPath; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\" id=\"prices-issue-link\">\n        <span class=\"glyphicon glyphicon-stats\"> ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.nouns.prices", options) : helperMissing.call(depth0, "__", "common.nouns.prices", options)))
+    + "\n      </a>\n    </li>\n  </ul>\n\n  <form class=\"listing-form form-horizontal\" enctype=\"multipart/form-data\">\n\n    ";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.partial || depth0.partial),stack1 ? stack1.call(depth0, "issues/form", options) : helperMissing.call(depth0, "partial", "issues/form", options)))
     + "\n    \n    <div class=\"form-actions col-sm-offset-2\">\n      <button type=\"submit\" class=\"save btn btn-primary\">";
@@ -289,6 +299,64 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
+templates["issues/prices"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function", self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, options;
+  buffer += "\n          ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.partial || depth0.partial),stack1 ? stack1.call(depth0, "prices/show", options) : helperMissing.call(depth0, "partial", "prices/show", options)))
+    + "\n        ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"container\">\n  <h2 class=\"col-sm-offset-2\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "issue.menu.edit_issue", options) : helperMissing.call(depth0, "__", "issue.menu.edit_issue", options)))
+    + "</h2>\n   <ul class=\"nav nav-tabs\" role=\"tablist\">\n    <li>\n      <a href=\"";
+  if (stack2 = helpers.editPath) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.editPath; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\" id=\"prices-issue-link\">\n        <span class=\"glyphicon glyphicon-edit\"></span> ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.edit", options) : helperMissing.call(depth0, "__", "common.actions.edit", options)))
+    + "\n      </a>\n    </li>\n    <li class=\"active\">\n      <a href=\"#\"><span class=\"glyphicon glyphicon-stats\"> ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.nouns.prices", options) : helperMissing.call(depth0, "__", "common.nouns.prices", options)))
+    + "</a>\n    </li>\n  </ul>\n\n  <form>\n\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.nouns.date", options) : helperMissing.call(depth0, "__", "common.nouns.date", options)))
+    + "</th>\n          <th>";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.nouns.price", options) : helperMissing.call(depth0, "__", "common.nouns.price", options)))
+    + "</th>\n          <th>"
+    + "</th>\n        </tr>\n      </thead>\n      <tbody>\n        ";
+  stack2 = helpers.each.call(depth0, depth0.prices, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n      </tbody>\n    </table>\n    \n    <div class=\"form-actions col-sm-offset-2\">\n      <button type=\"submit\" class=\"btn btn-primary\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "price.actions.save_all", options) : helperMissing.call(depth0, "__", "price.actions.save_all", options)))
+    + "</button>\n      <a href=\"";
+  if (stack2 = helpers.cancelPath) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.cancelPath; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\" class=\"cancel btn btn-default\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.cancel", options) : helperMissing.call(depth0, "__", "common.actions.cancel", options)))
+    + "</a>\n      <div class=\"pull-right\">\n        <button id=\"edit-mode\" type=\"button\" data-toggle=\"button\" class=\"btn btn-info\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "price.actions.edit_mode", options) : helperMissing.call(depth0, "__", "price.actions.edit_mode", options)))
+    + "</button>\n        <button id=\"delete-mode\" type=\"button\" data-toggle=\"button\" class=\"btn btn-info\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "price.actions.delete_mode", options) : helperMissing.call(depth0, "__", "price.actions.delete_mode", options)))
+    + "</button>\n      </div>\n    </div>\n  </form>\n</div>";
+  return buffer;
+  });
+
 templates["issues/show"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -298,16 +366,20 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   buffer += "<div class=\"clearfix\">\n  <h1>";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.i18n || depth0.i18n),stack1 ? stack1.call(depth0, "title", options) : helperMissing.call(depth0, "i18n", "title", options)))
-    + "</h1>\n  <ul class=\"list-inline left-sm\">\n    <li>\n      <a href=\"/issues/";
-  if (stack2 = helpers.objectId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.objectId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+    + "</h1>\n  <ul class=\"list-inline left-sm\">\n    <li>\n      <a href=\"";
+  if (stack2 = helpers.editPath) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.editPath; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "/";
-  options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.i18n || depth0.i18n),stack1 ? stack1.call(depth0, "slug", options) : helperMissing.call(depth0, "i18n", "slug", options)))
-    + "/edit\" id=\"edit-issue-link\" class=\"btn btn-default\">\n        <span class=\"glyphicon glyphicon-edit\"></span> ";
+    + "\" id=\"edit-issue-link\" class=\"btn btn-default\">\n        <span class=\"glyphicon glyphicon-edit\"></span> ";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.edit", options) : helperMissing.call(depth0, "__", "common.actions.edit", options)))
+    + "\n      </a>\n    </li>\n    <li>\n      <a href=\"";
+  if (stack2 = helpers.pricesPath) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.pricesPath; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\" id=\"prices-issue-link\" class=\"btn btn-default\">\n        <span class=\"glyphicon glyphicon-stats\"> ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.nouns.prices", options) : helperMissing.call(depth0, "__", "common.nouns.prices", options)))
     + "\n      </a>\n    </li>\n  </ul>\n</div>\n<table>\n  <thead>\n    <tr>\n      <th>Attribute</th>\n      <th>Explanation</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Issuance Date</td>\n      <td>";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.moment || depth0.moment),stack1 ? stack1.call(depth0, depth0.issuanceDate, options) : helperMissing.call(depth0, "moment", depth0.issuanceDate, options)))
@@ -315,6 +387,124 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.moment || depth0.moment),stack1 ? stack1.call(depth0, depth0.maturityDate, options) : helperMissing.call(depth0, "moment", depth0.maturityDate, options)))
     + "</td>\n    </tr>\n  </tbody>\n</table>\n";
+  return buffer;
+  });
+
+templates["prices/new"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+
+
+  buffer += "<tr class=\"price-new price-";
+  if (stack1 = helpers.cid) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.cid; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " unsaved\" data-cid=\"";
+  if (stack1 = helpers.cid) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.cid; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n  <td>\n    <div class=\"value date-value hide\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.moment || depth0.moment),stack1 ? stack1.call(depth0, depth0.date, options) : helperMissing.call(depth0, "moment", depth0.date, options)))
+    + "</div>\n    <div class=\"input-group\">\n      <label class=\"sr-only\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.nouns.date", options) : helperMissing.call(depth0, "__", "common.nouns.date", options)))
+    + "</label>\n      <input type=\"text\" class=\"form-control date-input datepicker\" maxlength=\"10\" required=\"required\" data-date-format=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.dates.formats.input", options) : helperMissing.call(depth0, "__", "common.dates.formats.input", options)))
+    + "\" value=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.datepicker || depth0.datepicker),stack1 ? stack1.call(depth0, depth0.date, options) : helperMissing.call(depth0, "datepicker", depth0.date, options)))
+    + "\" data-date=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.datepicker || depth0.datepicker),stack1 ? stack1.call(depth0, depth0.date, options) : helperMissing.call(depth0, "datepicker", depth0.date, options)))
+    + "\" />\n    </div>\n  </td>\n  <td>\n    <div class=\"value price-value hide\">";
+  if (stack2 = helpers.price) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.price; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</div>\n    <div class=\"input-group\">\n      <label class=\"sr-only\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.nouns.price", options) : helperMissing.call(depth0, "__", "common.nouns.price", options)))
+    + "</label>\n      <div class=\"input-group\">\n        <span class=\"input-group-addon\">$</span>\n        <input type=\"number\" class=\"form-control price-input\" step=\".01\" min=\"0\" placeholder=\"100.00\" maxlength=\"6\" required=\"required\" value=\"";
+  if (stack2 = helpers.price) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.price; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\">\n      </div>\n    </div>\n  </td>\n  <td>\n    <button type=\"button\" class=\"btn btn-sm btn-default edit hide\">\n      <span class=\"glyphicon glyphicon-edit\" title=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.edit", options) : helperMissing.call(depth0, "__", "common.actions.edit", options)))
+    + "\"></span>\n    </button>\n    <button type=\"button\" class=\"btn btn-sm btn-default save-changes\">\n      ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.save", options) : helperMissing.call(depth0, "__", "common.actions.save", options)))
+    + "\n    </button>\n    <button type=\"button\" class=\"btn btn-sm btn-default discard-changes hide\">\n      ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.cancel", options) : helperMissing.call(depth0, "__", "common.actions.cancel", options)))
+    + "\n    </button>\n    <button type=\"button\" class=\"btn btn-sm btn-success add\">\n      <span class=\"glyphicon glyphicon-plus\" title=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.add", options) : helperMissing.call(depth0, "__", "common.actions.add", options)))
+    + "\"></span>\n    </button>\n    <button type=\"button\" class=\"btn btn-sm btn-danger remove hide\">\n      <span class=\"glyphicon glyphicon-remove\" title=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.remove", options) : helperMissing.call(depth0, "__", "common.actions.remove", options)))
+    + "\"></span>\n    </button>\n  </td>\n</tr>";
+  return buffer;
+  });
+
+templates["prices/show"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+
+
+  buffer += "<tr id=\"price-";
+  if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"price-existing\" data-id=\"";
+  if (stack1 = helpers.objectId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.objectId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n  <td>\n    <div class=\"value date-value\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.moment || depth0.moment),stack1 ? stack1.call(depth0, depth0.date, options) : helperMissing.call(depth0, "moment", depth0.date, options)))
+    + "</div>\n    <div class=\"input-group hide\">\n      <label class=\"sr-only\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.nouns.date", options) : helperMissing.call(depth0, "__", "common.nouns.date", options)))
+    + "</label>\n      <input type=\"text\" class=\"form-control date-input datepicker\" maxlength=\"10\" required=\"required\" data-date-format=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.dates.formats.input", options) : helperMissing.call(depth0, "__", "common.dates.formats.input", options)))
+    + "\" value=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.datepicker || depth0.datepicker),stack1 ? stack1.call(depth0, depth0.date, options) : helperMissing.call(depth0, "datepicker", depth0.date, options)))
+    + "\" data-date=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.datepicker || depth0.datepicker),stack1 ? stack1.call(depth0, depth0.date, options) : helperMissing.call(depth0, "datepicker", depth0.date, options)))
+    + "\" />\n    </div>\n  </td>\n  <td>\n    <div class=\"value price-value\">";
+  if (stack2 = helpers.price) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.price; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</div>\n    <div class=\"input-group hide\">\n      <label class=\"sr-only\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.nouns.price", options) : helperMissing.call(depth0, "__", "common.nouns.price", options)))
+    + "</label>\n      <div class=\"input-group\">\n        <span class=\"input-group-addon\">$</span>\n        <input type=\"number\" class=\"form-control price-input\" step=\".01\" min=\"0\" placeholder=\"100.00\" maxlength=\"6\" required=\"required\" value=\"";
+  if (stack2 = helpers.price) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.price; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\">\n      </div>\n    </div>\n  </td>\n  <td>\n    <button type=\"button\" class=\"btn btn-sm btn-default edit\">\n      <span class=\"glyphicon glyphicon-edit\" title=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.edit", options) : helperMissing.call(depth0, "__", "common.actions.edit", options)))
+    + "\"></span>\n    </button>\n    <button type=\"button\" class=\"btn btn-sm btn-default save-changes hide\">\n      ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.save", options) : helperMissing.call(depth0, "__", "common.actions.save", options)))
+    + "\n    </button>\n    <button type=\"button\" class=\"btn btn-sm btn-default discard-changes hide\">\n      ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.cancel", options) : helperMissing.call(depth0, "__", "common.actions.cancel", options)))
+    + "\n    </button>\n    <button type=\"button\" class=\"btn btn-sm btn-success add\">\n      <span class=\"glyphicon glyphicon-plus\" title=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.add", options) : helperMissing.call(depth0, "__", "common.actions.add", options)))
+    + "\"></span>\n    </button>\n    <button type=\"button\" class=\"btn btn-sm btn-danger remove hide\">\n      <span class=\"glyphicon glyphicon-remove\" title=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.__ || depth0.__),stack1 ? stack1.call(depth0, "common.actions.remove", options) : helperMissing.call(depth0, "__", "common.actions.remove", options)))
+    + "\"></span>\n    </button>\n  </td>\n</tr>";
   return buffer;
   });
 

@@ -3,6 +3,16 @@
 
   _ = require("underscore");
 
+  Parse.Cloud.beforeSave("Price", function(req, res) {
+    if (!req.object.get("price")) {
+      return req.error("missing.price");
+    }
+    if (!req.object.get("date")) {
+      return req.error("missing.date");
+    }
+    return res.success();
+  });
+
   Parse.Cloud.beforeSave("Issue", function(req, res) {
     var issue, stopWords, titleEN, titleFR, words;
     issue = req.object;

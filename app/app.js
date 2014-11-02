@@ -43,6 +43,7 @@
     initialize: function() {
       var phrases;
       Parse.initialize(APPID, JSKEY);
+      Parse.app = this;
       this.locale = this.locale || 'en';
       this.lang = this.locale;
       phrases = {

@@ -23,19 +23,19 @@ module.exports = (Handlebars) ->
     @[attr+Handlebars.polyglot.currentLocale.toUpperCase()]
 
   moment: (context, format) ->
+    return '' unless context?
     if typeof format isnt "String" then format = "LL"
     moment(context.iso).format(format)
 
   duration: (context, format) ->
+    return '' unless context?
     if typeof format isnt "String" then format = "LL"
     moment.duration(context.iso).format(format)
 
   datepicker: (context) ->
-    if context?
-      format = Handlebars.polyglot.t("common.dates.formats.output")
-      moment(context.iso).format(format)
-    else
-      ""
+    return '' unless context?
+    format = Handlebars.polyglot.t("common.dates.formats.output")
+    moment(context.iso).format(format)
 
 
   log: (variable) -> console.log variable

@@ -9,6 +9,8 @@
     match("issues/:objectId/:slugFR", "issues#show");
     match("issues/:objectId/:slugEN/edit", "issues#edit");
     match("issues/:objectId/:slugFR/edit", "issues#edit");
+    match("issues/:objectId/:slugEN/prices", "issues#prices");
+    match("issues/:objectId/:slugFR/prices", "issues#prices");
     match("users/:objectId", "profiles#show");
     match("users/:objectId/edit", "profiles#edit");
     match("account/settings", "users#settings");
